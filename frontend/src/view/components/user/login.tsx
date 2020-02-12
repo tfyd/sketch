@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { validEmail } from '../../../utils/validates';
 import { Card } from '../common/card';
 import { NoticeBar } from '../common/notice-bar';
+import './login.scss';
 // FIXME: internal server error will be treated as incorrect password 
 interface Props {
   login:(email:string, pwd:string) => Promise<boolean>;
@@ -22,13 +23,13 @@ export class Login extends React.Component<Props, State> {
 
   public render () {
     return <Card>
-      <div className="card-header" style={{boxShadow: 'none'}}><h1 className="title">登录</h1></div>
+        <div className="card-header" style={{boxShadow: 'none'}}><h1 className="title">登录</h1></div>
         <div className="card-content">
 
         { this.state.errMsg && <NoticeBar>{this.state.errMsg}</NoticeBar> }
 
         邮箱:
-        <input className="input is-normal"
+        <input className="input is-normal inputbox"
           type="email"
           value={this.state.email}
           onChange={(ev) => this.setState({email:ev.target.value})} />
@@ -37,7 +38,7 @@ export class Login extends React.Component<Props, State> {
 
         密码:
         <input
-          className="input is-normal"
+          className="input is-normal inputbox"
           type="password"
           value={this.state.password}
           onChange={(ev) => this.setState({password:ev.target.value})} />
@@ -55,7 +56,7 @@ export class Login extends React.Component<Props, State> {
           }}>忘记密码/重新激活</Link>
         </div>
 
-        <a className="button is-fullwidth" onClick={async (ev) => {
+        <a className="button color-primary login-button"onClick={async (ev) => {
           if (this.state.email === '') {
             this.setState({errMsg: '邮箱 不能为空。'});
           } else if (this.state.password === '') {
