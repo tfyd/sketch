@@ -28,7 +28,7 @@ export class Register extends React.Component<Props, State> {
     errMsg: '',
   };
 
-  public inputStyle = 'input is-normal inputbox';
+  public inputStyle = 'input is-normal inputbox-reg';
 
   public render () {
     return <Card>

@@ -1,18 +1,63 @@
 .inputbox {
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
+    height: 38px;
+    margin-bottom: 12px;
+    display: block;
+    background-color: #F4F5F9;
     box-sizing: border-box;
-    border-radius: 5px;
+    border-radius: 19px;
+    font-size: 10pt;
+    padding-left: 12px;
 }
 
-.inputbox:focus {
-    border: 1px solid #ccc;    
+.textfield {
+    height: 38px; 
+    margin-left: 8px;
+    display: inline-block;
+    font-size: 10pt;
+    font-family: PingFangSC-Light;
+    line-height: 38px;
+    vertical-align: top;
+}
+
+.dividing-line {
+    height: 38px;
+    margin-left: 5px;
+    margin-right: 5px;
+    display: inline-block;
+    font-size: 12pt;
+    font-family: PingFangSC-Light;
+    line-height: 38px;
+
+}
+
+.inputfield {
+    background-color: #F4F5F9;
+    padding-left: 10px;
+    font-size: 10pt;
+
 }
 
 .login-button {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 30px;
+    width: 100%;
+    display: block;
+    border-radius: 19px !important;
+}
+
+.login-logo {
+    color: white;
+    font-size: 60px;
+    width: 72px;
+    height: 72px;
+    background-color: black;
+    border-radius: 50%;
+    margin: 60px auto;
+}
+
+.card-footer {
+    margin-top: 60%;
+    margin-left: 30%;
+    color: grey;
+
 }

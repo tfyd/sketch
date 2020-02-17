@@ -22,39 +22,35 @@ export class Login extends React.Component<Props, State> {
   };
 
   public render () {
-    return <Card>
-        <div className="card-header" style={{boxShadow: 'none'}}><h1 className="title">登录</h1></div>
+    return <Card style={{
+        height: '100%', marginTop: '0', padding: '10%'
+      }}>
         <div className="card-content">
 
-        { this.state.errMsg && <NoticeBar>{this.state.errMsg}</NoticeBar> }
 
-        邮箱:
-        <input className="input is-normal inputbox"
+        
+        <div className="login-logo"> 废 </div>
+
+
+        <div className="inputbox">
+        <div className = "textfield">账号</div> <div className = "dividing-line">|</div> 
+        <input className="input is-normal inputfield"
           type="email"
           value={this.state.email}
           onChange={(ev) => this.setState({email:ev.target.value})} />
-
         <br />
+        </div>
 
-        密码:
+        <div className="inputbox">
+        <div className = "textfield">密码</div> <div className = "dividing-line">|</div> 
         <input
-          className="input is-normal inputbox"
+          className="input is-normal inputfield"
           type="password"
           value={this.state.password}
           onChange={(ev) => this.setState({password:ev.target.value})} />
-
-        <div style={{
-          marginTop: '1vh',
-          textAlign: 'justify',
-        }}>
-          <label className="checkbox"><input type="checkbox" />记住我</label>
-          <Link to="reset_password"
-            style={{
-            color: 'grey',
-            float: 'right',
-            fontSize: 'smaller',
-          }}>忘记密码/重新激活</Link>
         </div>
+
+        { this.state.errMsg && <NoticeBar>{this.state.errMsg}</NoticeBar> }
 
         <a className="button color-primary login-button"onClick={async (ev) => {
           if (this.state.email === '') {
@@ -71,10 +67,26 @@ export class Login extends React.Component<Props, State> {
             }
           }
         }}>登录</a>
+
+        <Link to="reset_password"
+        style={{
+        color: '#CE565D',
+        float: 'left',
+        fontSize: '12px',
+        margin: '10px'
+      }}>忘记密码?</Link>
       </div>
+
+
+
+
       <div className="card-footer">
-        <span>还没账号?&#160;&#160;</span><Link to="/register">现在注册</Link>!
+      废文1.0｜copyright xxx
       </div>
-    </Card>;
+
+    </Card>
   }
 }
+
+// <label className="checkbox"><input type="checkbox" />记住我</label>
+// <span>还没账号?&#160;&#160;</span><Link to="/register">现在注册</Link>!
