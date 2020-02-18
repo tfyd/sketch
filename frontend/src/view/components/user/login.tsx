@@ -22,14 +22,14 @@ export class Login extends React.Component<Props, State> {
   };
 
   public render () {
-    return <Card style={{
+    return <Card className = 'login' style={{
         height: '100%', marginTop: '0', padding: '10%'
       }}>
         <div className="card-content">
 
 
         
-        <div className="login-logo"> 废 </div>
+        <div className="login-logo"> </div>
 
 
         <div className="inputbox">
@@ -52,7 +52,7 @@ export class Login extends React.Component<Props, State> {
 
         { this.state.errMsg && <NoticeBar>{this.state.errMsg}</NoticeBar> }
 
-        <a className="button color-primary login-button"onClick={async (ev) => {
+        <a className="button color-primary login-button" onClick={async (ev) => {
           if (this.state.email === '') {
             this.setState({errMsg: '邮箱 不能为空。'});
           } else if (this.state.password === '') {
@@ -74,15 +74,16 @@ export class Login extends React.Component<Props, State> {
         float: 'left',
         fontSize: '12px',
         margin: '10px'
-      }}>忘记密码?</Link>
+        }}>忘记密码?</Link>
+
       </div>
-
-
-
 
       <div className="card-footer">
       废文1.0｜copyright xxx
       </div>
+
+
+
 
     </Card>
   }

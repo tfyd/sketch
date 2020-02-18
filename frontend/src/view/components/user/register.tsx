@@ -31,7 +31,7 @@ export class Register extends React.Component<Props, State> {
   public inputStyle = 'input is-normal inputbox-reg';
 
   public render () {
-    return <Card>
+    return <Card className="register">
       <div className="card-header" style={{boxShadow: 'none'}}>
         <h1 className="title">注册</h1>
       </div>

@@ -1,4 +1,5 @@
-.inputbox {
+.login{
+    .inputbox {
     width: 100%;
     height: 38px;
     margin-bottom: 12px;
@@ -10,54 +11,55 @@
     padding-left: 12px;
 }
 
-.textfield {
-    height: 38px; 
-    margin-left: 8px;
-    display: inline-block;
-    font-size: 10pt;
-    font-family: PingFangSC-Light;
-    line-height: 38px;
-    vertical-align: top;
-}
+    .textfield {
+        height: 38px; 
+        margin-left: 8px;
+        display: inline-block;
+        font-size: 10pt;
+        font-family: PingFangSC-Light;
+        line-height: 38px;
+        vertical-align: top;
+    }
 
-.dividing-line {
-    height: 38px;
-    margin-left: 5px;
-    margin-right: 5px;
-    display: inline-block;
-    font-size: 12pt;
-    font-family: PingFangSC-Light;
-    line-height: 38px;
+    .dividing-line {
+        height: 38px;
+        margin-left: 5px;
+        margin-right: 5px;
+        display: inline-block;
+        font-size: 12pt;
+        font-family: PingFangSC-Light;
+        line-height: 38px;
 
-}
+    }
 
-.inputfield {
-    background-color: #F4F5F9;
-    padding-left: 10px;
-    font-size: 10pt;
+    .inputfield {
+        background-color: #F4F5F9;
+        padding-left: 10px;
+        font-size: 10pt;
 
-}
+    }
 
-.login-button {
-    margin-top: 30px;
-    width: 100%;
-    display: block;
-    border-radius: 19px !important;
-}
+    .login-button {
+        margin-top: 30px;
+        width: 100%;
+        display: block;
+        border-radius: 19px !important;
+        line-height: 36px;
+    }
 
-.login-logo {
-    color: white;
-    font-size: 60px;
-    width: 72px;
-    height: 72px;
-    background-color: black;
-    border-radius: 50%;
-    margin: 60px auto;
-}
+    .login-logo {
+        width: 72px;
+        height: 72px;
+        margin: 60px auto;
+        background-size: 72px 72px;
+        background-image:url("../../../../assets/login-logo.jpg");
+    }
 
-.card-footer {
-    margin-top: 60%;
-    margin-left: 30%;
-    color: grey;
-
+    .card-footer {
+        position: absolute;
+        top: 90%;
+        color: gray;
+        width: 80%;
+        text-align: center;
+    }
 }
