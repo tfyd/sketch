@@ -22,9 +22,7 @@ export class Login extends React.Component<Props, State> {
   };
 
   public render () {
-    return <Card className = 'login' style={{
-        height: '100%', marginTop: '0', padding: '10%'
-      }}>
+    return <Card className = 'login'>
         <div className="card-content">
 
 
@@ -68,26 +66,18 @@ export class Login extends React.Component<Props, State> {
           }
         }}>登录</a>
 
+        <Link to="/register" className="register">注册</Link>
+
         <Link to="reset_password"
-        style={{
-        color: '#CE565D',
-        float: 'left',
-        fontSize: '12px',
-        margin: '10px'
-        }}>忘记密码?</Link>
+        className="forgot-password">忘记密码?</Link>
 
       </div>
 
       <div className="card-footer">
       废文1.0｜copyright xxx
       </div>
-
-
-
-
     </Card>
   }
 }
 
 // <label className="checkbox"><input type="checkbox" />记住我</label>
-// <span>还没账号?&#160;&#160;</span><Link to="/register">现在注册</Link>!
