@@ -133,11 +133,10 @@ export namespace ResData {
         next_id: 0,
         reviewee_id: 0,
         reviewee_type: 'thread',
-        recommend: false,
-        editor_recommend: false,
         rating: 0,
         redirect_count: 0,
         author_attitude: 0,
+        summary: '',
       },
       reviewee: allocThread(),
     };
@@ -149,6 +148,7 @@ export namespace ResData {
     attributes:Database.Post;
     info:PostInfo;
     parent:Post[];
+    thread?:Thread;
   }
 
   export function allocPost () : Post {
@@ -217,6 +217,20 @@ export namespace ResData {
     date:Timestamp;
     timezone_type:number;
     timezone:string;
+  }
+
+  export interface Activity {
+    type:'activity';
+    id:number;
+    attributes:{
+      kind:number;
+      seen:boolean;
+      item_id:number;
+      item_type:string;
+      user_id:number;
+    };
+    item:Post | Status | Quote | Thread;
+    author?:User;
   }
 
   export interface Message {
@@ -494,6 +508,10 @@ export namespace API {
       followers:ResData.User[],
       paginate:ResData.ThreadPaginate,
     };
+    '/user/$0/activity':{
+      activities:ResData.Activity[],
+      paginate:ResData.ThreadPaginate,
+    };
     '/user/$0/message':{
       messages:ResData.Message[],
       paginate:ResData.ThreadPaginate,
@@ -510,6 +528,7 @@ export namespace API {
       titles:ResData.Title[],
       paginate:ResData.ThreadPaginate,
     };
+    '/user/$0/vote_received':ResData.Vote[];
     '/vote':{
       votes:ResData.Vote[],
       paginate:ResData.ThreadPaginate,
@@ -533,7 +552,6 @@ export namespace API {
       chapters:ResData.Post[],
       paginate:ResData.ThreadPaginate,
       most_upvoted:ResData.Post,
-      top_review:null|ResData.Post,
     };
     '/collection':{ // fixme: need check
       threads:ResData.Thread[],
