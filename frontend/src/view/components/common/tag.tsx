@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { classnames } from '../../../utils/classname';
-import { TagColor } from '../../theme/theme';
 import './tag.scss';
+
+type TagColor = 'black'|'dark'|'light'|'white'|'primary'|'link'|'info'|'success'|'warning'|'danger';
 
 export class Tag extends React.Component<{
   // props
   children?:React.ReactNode;
   className?:string;
   style?:React.CSSProperties;
-  //onClick?:() => void;
   onClick?:(selected:boolean, selectedId:string) => void;
   selected?:boolean;
   size?:'normal'|'medium'|'large'|'default';

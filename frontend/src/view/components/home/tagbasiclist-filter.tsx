@@ -47,7 +47,8 @@ export class TagBasicListFilter extends React.Component<{
         width:'100%',
       }}>
         <div style={{
-          width:'100%',
+          width:'90%',
+          height: '31px',
           margin:'0 auto',
           padding:'10px  20px',
           display:'flex',
@@ -59,11 +60,13 @@ export class TagBasicListFilter extends React.Component<{
 
         <div style={{
             flex:'1',
+            padding: '5px',
             backgroundColor: 'white',
             marginRight:'20px',
             borderRadius: '15px',
+
         }}>
-          <i className="fas fa-search" style={{margin:'0 5px 0 10px'}}></i>
+          <i className="fas fa-search" style={{margin:'5px 5px 5px 10px'}}></i>
           <input type="text" placeholder=""
           style={window.screen.width >= 400 ? {
             border:'none', margin:'0', padding:'0', textAlign: 'left',
@@ -82,7 +85,8 @@ export class TagBasicListFilter extends React.Component<{
             }}
             />
         </div>
-        <div onClick={() => this.props.onBack }>取消</div>
+        <div onClick={() => this.props.onBack }
+        style={{marginTop:'5px'}}>取消</div>
       </div>
         {this.props.taglist.map((category) => {
         return  <TagBasicList

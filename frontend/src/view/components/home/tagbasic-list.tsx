@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { classnames } from '../../../utils/classname';
 import { Tag } from '../common/tag';
-import { TagColor } from '../../theme/theme';
 
-
+type TagColor = 'black'|'dark'|'light'|'white'|'primary'|'link'|'info'|'success'|'warning'|'danger';
 type tagType = {
   tagId:string,
   tagName:string,
