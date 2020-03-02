@@ -39,11 +39,11 @@ import { InputText } from '../view/components/common/input/text';
 import { ThreadPreview } from '../view/components/thread/thread-preview';
 import { randomCnWords } from '../utils/fake';
 import { ChannelPreview } from '../view/components/home/channel-preview';
-/*
-import { TagBasicList } from '../view/components/home/tagbasic-list';
+
+import { TagBasicList } from '../view/components/home/tagbasic-list'
 import { TagBasicListSelect } from '../view/components/home/tagbasiclist-select';
 import { TagBasicListFilter } from '../view/components/home/tagbasiclist-filter';
-*/
+
 import { ChatBubble } from '../view/components/message/chat-bubble';
 import { ExpandableMessage } from '../view/components/message/expandable-message';
 import { Fragment } from 'react';
@@ -597,7 +597,7 @@ storiesOf('Home Components/HomePage', module)
         </Router>;
     }
   }))
-  /*
+  
   .add('TagBasicList1', () => React.createElement(class extends React.Component {
     public render () {
       return <div style={{
@@ -714,7 +714,6 @@ storiesOf('Home Components/HomePage', module)
         </TagBasicListFilter>;
     }
   }))
-  */
 ;
 storiesOf('Home Components', module)
 ;

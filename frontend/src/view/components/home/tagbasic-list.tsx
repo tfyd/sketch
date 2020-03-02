@@ -1,14 +1,15 @@
 import * as React from 'react';
 import { classnames } from '../../../utils/classname';
 import { Tag } from '../common/tag';
+import { TagColor } from '../../theme/theme';
 
-type TagColor = 'black'|'dark'|'light'|'white'|'primary'|'link'|'info'|'success'|'warning'|'danger';
+
 type tagType = {
   tagId:string,
   tagName:string,
 };
 
-/*
+
 export class TagBasicList extends React.Component<{
   // props
   tagCategoryName:string;
@@ -54,9 +55,9 @@ export class TagBasicList extends React.Component<{
   public render () {
     return (
       <div  style={{
-        width:'100%',
+        width:'90%',
         margin:'0 auto',
-        padding:'10px  20px',
+        padding:'10px 20px',
         borderBottom: '3px solid rgba(244,245,249,1)',
         display:'flex',
         flexDirection: 'column',
@@ -64,7 +65,7 @@ export class TagBasicList extends React.Component<{
         backgroundColor: this.props.backgroundColor}} >
       <div>
         <h6 className="title is-6"
-          style={{ float:'left', textAlign:'left', marginBottom: '5px'}}>
+          style={{ fontSize: 'var(--font-size-4)',float:'left', textAlign:'left', marginTop: '5px', marginBottom: '5px'}}>
           {this.props.tagCategoryName}
           {this.state.sortAvailable && <i className={classnames(
             'fas',
@@ -81,7 +82,7 @@ export class TagBasicList extends React.Component<{
             }}>
           </i>}
         </h6>
-        <span style={{ float:'right', display:this.props.showTrashbin ? 'inline' : 'none'}}>
+        <span style={{ float:'right', marginTop: '5px', display:this.props.showTrashbin ? 'inline' : 'none'}}>
           <i className="far fa-trash-alt"></i>
         </span>
       </div>
@@ -104,4 +105,3 @@ export class TagBasicList extends React.Component<{
     );
   }
 }
-*/

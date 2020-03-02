@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { classnames } from '../../../utils/classname';
-import { Colors } from '../../theme/theme';
+import { TagColor } from '../../theme/theme';
 import './tag.scss';
 
 export class Tag extends React.Component<{
@@ -8,12 +8,15 @@ export class Tag extends React.Component<{
   children?:React.ReactNode;
   className?:string;
   style?:React.CSSProperties;
-  onClick?:() => void;
+  //onClick?:() => void;
+  onClick?:(selected:boolean, selectedId:string) => void;
   selected?:boolean;
-  size?:'small'|'default';
-  color?:Colors;
-  selectedColor?:Colors;
+  size?:'normal'|'medium'|'large'|'default';
+  color?:TagColor;
+  selectedColor?:TagColor;
   rounded?:boolean;
+  tagId?: String;
+  tagName?: String;
 }, {
 }> {
   public render () {
@@ -25,7 +28,8 @@ export class Tag extends React.Component<{
         {[this.props.selectedColor || 'color-primary']: this.props.selected},
         {[this.props.color || '']: !this.props.selected},
       )}
+
       style={this.props.style}
-      onClick={this.props.onClick}>{this.props.children}</span>;
+      onClick={() => this.props.onClick}>{this.props.children}{this.props.tagName}</span>;
   }
 }

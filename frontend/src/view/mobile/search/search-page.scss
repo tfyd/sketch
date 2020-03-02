@@ -1,0 +1,15 @@
+.search-page {
+    padding: 4px;
+    .search-bar{
+        .search-input {
+            text-align: center;
+            width: 85%;
+            color: var(--color-placeholder);
+            font-size: var(--font-size-1);
+        } 
+        .cancel {
+            padding: 0 8px;
+            font-size: var(--font-size-2);
+        }
+    }
+}

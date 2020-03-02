@@ -38,19 +38,3 @@
   }
 }
 
-.search-page {
-  .search-bar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    input {
-      @extend %search-input;
-    }
-
-    .cancel {
-      padding: 0 8px;
-      font-size: var(--font-size-2);
-    }
-  }
-}
