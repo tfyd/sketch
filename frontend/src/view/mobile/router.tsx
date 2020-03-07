@@ -2,10 +2,6 @@ import * as React from 'react';
 import { Switch, Route, RouteComponentProps } from 'react-router-dom';
 import { Core } from '../../core';
 import { User } from './user';
-import { Message } from './message';
-import { PersonalMessage } from './message/personal-msg';
-import { Dialogue } from './message/dialogue';
-import { PublicNotice } from './message/public-notice';
 import { Status } from './status';
 import { LoginRoute } from './user/login';
 import { HomeMain } from './home/main';
@@ -19,10 +15,17 @@ import { Suggestion } from './home/suggestion';
 import { Library } from './home/library';
 import { Collection } from './collection';
 import { ForumTags } from '../components/thread/forum-tags';
+
+// msg system
+import { Message } from './message';
+import { PersonalMessage } from './message/personal-msg';
+import { Dialogue } from './message/dialogue';
+import { PublicNotice } from './message/public-notice';
 import { Votes } from './message/votes';
 import { Book } from './forum/book';
 import { Reply } from '../components/thread/reply';
 import { Review } from '../components/thread/review';
+import { RewardNotice } from './message/reward-notice';
 
 interface Props {
   core:Core;
@@ -71,6 +74,7 @@ export const MobileRoutes = {
   [RoutePath.dialogue]: Dialogue,
   [RoutePath.messages]: Message,
   [RoutePath.votes]: Votes,
+  [RoutePath.rewards]: RewardNotice,
 
   // other
   [RoutePath.tags]: ForumTags,

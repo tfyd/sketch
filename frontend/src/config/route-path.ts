@@ -27,6 +27,7 @@ export enum RoutePath {
   publicNotice = '/messages/publicnotice',
   messages = '/messages/activity',
   votes = '/messages/vote',
+  rewards = '/messages/reward',
 
   // other
   tags = '/tags',

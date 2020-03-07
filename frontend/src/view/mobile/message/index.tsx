@@ -46,7 +46,9 @@ export class Message extends React.Component<MobileRouteProps, State> {
           <MenuItem icon="far fa-thumbs-up icon" title="点赞提醒"
             onClick={() => history.push(RoutePath.votes)}
             badgeNum={1000}/>
-          <MenuItem icon="fas fa-gift icon" title="打赏提醒" badgeNum={1}/>
+          <MenuItem icon="fas fa-gift icon" title="打赏提醒"
+            onClick={() => history.push(RoutePath.rewards)}
+            badgeNum={1}/>
         </Menu>
 
         <List className="message-list">
