@@ -421,6 +421,22 @@ export namespace ResData {
     };
     author:User;
   }
+
+  export interface Reward {
+    type:'reward';
+    id:number;
+    attributes:{
+      rewardable_type:ReqData.Reward.rewardableType;
+      rewardable_id:number;
+      reward_type:ReqData.Reward.rewardType;
+      reward_value:number;
+      created_at:Timestamp;
+      deleted_at:Timestamp;
+    };
+    author?:User;   //available at reward_received
+    receiver?:User; //available at reward_sent
+  }
+
   export interface Collection {
     type:'collection';
     id:number;
@@ -535,6 +551,20 @@ export namespace ReqData {
       downvote = 'downvote',
       funnyvote = 'funnyvote',
       foldvote = 'foldvote',
+    }
+  }
+
+  export namespace Reward {
+    export enum rewardableType {
+      post = 'post',
+      quote = 'quote',
+      status = 'status',
+      thread = 'thread',
+    }
+    export enum rewardType {
+      salt = 'salt',
+      fish = 'fish',
+      ham = 'ham',
     }
   }
 

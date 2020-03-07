@@ -318,7 +318,22 @@ export class DB {
     });
   }
 
-  // 评票
+  // FIXME
+  //reward system
+  // get rewards received by a user
+  public getUserRewardsReceived = (userId:number = this.user.id) => {
+    return this._get('/user/$0/reward_received', {
+      pathInsert: [userId],
+    });
+  }
+  // get rewards sent by a user
+  public getUserRewardsSent = (userId:number = this.user.id) => {
+    return this._get('/user/$0/reward_sent', {
+      pathInsert: [userId],
+    });
+  }
+
+  // Vote System
   public vote (type:ReqData.Vote.type, id:number, attitude:ReqData.Vote.attitude) : Promise<ResData.Vote> {
     return this._post('/vote', {
       body: {
