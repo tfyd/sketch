@@ -5,7 +5,7 @@ import { Page } from '../../components/common/page';
 import { NavBar } from '../../components/common/navbar';
 import { List } from '../../components/common/list';
 import { MarkAllAsRead } from './mark-all-as-read';
-import ClampLines from 'react-clamp-lines';
+import { RewardItem } from './reward-item';
 
 interface State {
   rewardsReceived:API.Get['/user/$0/reward_received'];
@@ -61,34 +61,6 @@ export class RewardNotice extends React.Component<MobileRouteProps, State> {
       </Page>);
   }
 
-  private renderReward(reward) {
-    const { author, receiver, id, attributes } = reward;
-    const authorName = author ? author.attributes.name : '你';
-    const receiverName = receiver ? receiver.attributes.name : '你';
-    const {rewardable_type, reward_type, reward_value} = attributes;
-    const brief = '等待API等待API等待API等待API等待API等待API等待API等待API等待API等待API等待API等待API等待API等待API等待API等待API';
-    // TODO: implement seen and mark as read
-    const seen = Math.random() > 0.5;
-
-    return (
-      <List.Item key={id}>
-        <div className="item-container">
-          <div className="item-first-line">
-            <div className={seen ? '' : 'unread'}>{authorName}打赏了{receiverName}的{config.rewardableType[rewardable_type]}{reward_value}{config.rewardType[reward_type]}</div>
-          </div>
-          <div className="item-brief">
-            <ClampLines
-            text={brief}
-            id={'reward' + id}
-            lines={2}
-            ellipsis="..."
-            buttons={false}
-            innerElement="p"/>
-          </div>
-        </div>
-      </List.Item>);
-  }
-
   private getRewards() {
     return [...this.state.rewardsReceived, ...this.state.rewardsSent]
       .sort((r1, r2) => {
@@ -100,9 +72,14 @@ export class RewardNotice extends React.Component<MobileRouteProps, State> {
   private renderRewards () {
     const rewards = this.getRewards();
     return (
-      <List>
-        {rewards.map((d) => this.renderReward(d))}
-      </List>
-            );
+      <List className="message-list">
+        {rewards.map((d) =>
+          <RewardItem
+            key={d.id}
+            read={Math.random() > 0.5}
+            reward={d}
+            userId={this.props.core.user.id}
+          />)}
+      </List>);
   }
 }

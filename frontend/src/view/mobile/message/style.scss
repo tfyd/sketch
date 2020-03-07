@@ -19,9 +19,24 @@
 
 .message-list {
   margin-top: var(--margin-size-8);
+  .left{
+    width: 65%;
+  }
   .item-first-line .right{
     color: var(--color-font-light);
     font-size: var(--font-size-10);
+    display: inline-flex;
+    align-items: center;
+    margin-left: var(--right-margin-1);
+    text-align: right;
+    .delete-btn{
+      color: var(--color-primary);
+      margin-right: var(--right-margin-1);
+      min-width: 40px;
+    }
+    .delete-btn:hover{
+      font-weight: bold;
+    }
   }
   .item-brief {
     color: var(--color-font-light);

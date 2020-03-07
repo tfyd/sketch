@@ -35,8 +35,9 @@ export class Votes extends React.Component<MobileRouteProps, State> {
       <List.Item key={vote.id}>
         <div className="item-container">
           <div className="item-first-line">
-            <span>{author}赞了你</span>
-            <span className="right">{vote.attributes.created_at}</span>
+            <span className="left">{author}赞了你</span>
+            {/* TODO: format Date */}
+            <span className="right">{vote.attributes.created_at.substr(0, 10)}</span>
           </div>
           <div className="item-brief">
             <ClampLines
