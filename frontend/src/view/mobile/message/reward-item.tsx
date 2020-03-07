@@ -9,6 +9,7 @@ export function RewardItem (props:{
   read:boolean;
   reward:ResData.Reward;
   userId:number;
+  deleteReward:(rewardId:number) => (e:React.MouseEvent) => void;
   className?:string;
 }) {
   const { author, receiver, id, attributes } = props.reward;
@@ -31,7 +32,10 @@ export function RewardItem (props:{
         <div className="item-first-line">
           <span className={props.read ? 'left' : 'left unread'}>{authorName}打赏了{receiverName}的{rewardableType}{reward_value}{rewardType}</span>
           <span className="right">
-            {fromMe && <span className="delete-btn">删除打赏</span>}
+            {fromMe &&
+              <span className="delete-btn" onClick={props.deleteReward(id)}>
+                删除打赏
+              </span>}
             {/* TODO: format Date */}
             <span>{created_at.substr(0, 10)}</span>
           </span>

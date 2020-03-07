@@ -12,20 +12,6 @@ interface State {
   rewardsSent:API.Get['/user/$0/reward_sent'];
 }
 
-const config = {
-  rewardableType: {
-    post: '帖子',
-    quote: '题头',
-    status: '动态',
-    thread: '主题',
-  },
-  rewardType: {
-    salt: '盐粒',
-    fish: '咸鱼',
-    ham: '火腿',
-  },
-};
-
 export class RewardNotice extends React.Component<MobileRouteProps, State> {
   public state:State = {
     rewardsReceived: [],
@@ -47,6 +33,21 @@ export class RewardNotice extends React.Component<MobileRouteProps, State> {
     const [rewardsReceived, rewardsSent] = await Promise.all([fetchRewardsReceived, fetchRewardsSent]);
     this.setState({rewardsReceived, rewardsSent});
     console.log(rewardsReceived, rewardsSent);
+  }
+
+  public deleteReward = (rewardId:number) => async () => {
+    try {
+      await this.props.core.db.deleteReward(rewardId);
+      let rewardsSent = this.state.rewardsSent;
+      rewardsSent.splice(rewardsSent.findIndex( (r) => r.id == rewardId), 1);
+      this.setState({rewardsSent});
+
+      // due to pagination, after we delete a reward, we have space for reward in page 2
+      rewardsSent = await this.props.core.db.getUserRewardsSent();
+      this.setState({rewardsSent});
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   public render () {
@@ -76,9 +77,10 @@ export class RewardNotice extends React.Component<MobileRouteProps, State> {
         {rewards.map((d) =>
           <RewardItem
             key={d.id}
-            read={Math.random() > 0.5}
+            read={false}
             reward={d}
             userId={this.props.core.user.id}
+            deleteReward={this.deleteReward}
           />)}
       </List>);
   }
