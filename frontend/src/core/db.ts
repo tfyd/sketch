@@ -372,6 +372,19 @@ export class DB {
     return this._get(`/user/${userId}/vote_received`);
   }
 
+    // FIXME
+    // get votes received by a user
+    // public getUserVotesReceived = (userId:number = this.user.id) => {
+    //   return this._get('/user/$0/vote_received', {
+    //     pathInsert: [userId],
+    //   });
+    // }
+    // public getUserVotesSent = (userId:number = this.user.id) => {
+    //   return this._get('/user/$0/vote_sent', {
+    //     pathInsert: [userId],
+    //   });
+    // }
+
   // 删除评票
   public deleteVote (voteId:number) : Promise<void> {
     return this._delete(`/vote/${voteId}`);
