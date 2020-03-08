@@ -33,7 +33,9 @@ export class Dropdown<T extends string|number> extends React.Component<Props<T>,
   }
 
   public render () {
-    return isMobile() ? this.renderMobile() : this.renderWeb();
+    // TODO: render mobile
+    return this.renderWeb();
+    // return isMobile() ? this.renderMobile() : this.renderWeb();
   }
 
   public renderMobile () {

@@ -4,18 +4,27 @@ import { MobileRouteProps } from '../router';
 import { Page } from '../../components/common/page';
 import { NavBar } from '../../components/common/navbar';
 import { List } from '../../components/common/list';
-import { MarkAllAsRead } from './mark-all-as-read';
+import { Toolbar } from './toolbar';
 import { RewardItem } from './reward-item';
 
 interface State {
   rewardsReceived:API.Get['/user/$0/reward_received'];
   rewardsSent:API.Get['/user/$0/reward_sent'];
+  filter:filterType;
 }
+
+type filterType = 'all' | 'received' | 'sent';
+const filterOptions = [
+  {text: '全部', value: 'all'},
+  {text: '收到的打赏', value: 'received'},
+  {text: '给出的打赏', value: 'sent'},
+]
 
 export class RewardNotice extends React.Component<MobileRouteProps, State> {
   public state:State = {
     rewardsReceived: [],
     rewardsSent: [],
+    filter: 'all',
   };
 
   public async componentDidMount() {
@@ -50,26 +59,47 @@ export class RewardNotice extends React.Component<MobileRouteProps, State> {
     }
   }
 
+  public setFilterOption = (option:string, i:number) => {
+    this.setState({filter:option as filterType});
+  }
+
   public render () {
     return (<Page className="msg-page"
         top={<NavBar goBack={this.props.core.route.back}>
           打赏提醒
         </NavBar>}>
 
-        < MarkAllAsRead />
+        < Toolbar
+          filterOptions={filterOptions}
+          setFilterOption={this.setFilterOption}
+        />
 
         { this.renderRewards() }
       </Page>);
   }
 
   private getRewards() {
-    return [...this.state.rewardsReceived, ...this.state.rewardsSent]
+    let selectedRewards:ResData.Reward[] = [];
+    switch (this.state.filter) {
+      case 'all':
+        selectedRewards = [...this.state.rewardsReceived, ...this.state.rewardsSent];
+        break;
+      case 'received':
+        selectedRewards = this.state.rewardsReceived;
+        break;
+      case 'sent':
+        selectedRewards = this.state.rewardsSent;
+        break;
+    }
+
+    return selectedRewards
       .sort((r1, r2) => {
         const d1 = new Date(r1.attributes.created_at);
         const d2 = new Date(r2.attributes.created_at);
         return (d2.getTime() - d1.getTime());
       });
   }
+
   private renderRewards () {
     const rewards = this.getRewards();
     return (

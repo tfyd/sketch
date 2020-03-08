@@ -332,6 +332,11 @@ export class DB {
       pathInsert: [userId],
     });
   }
+  public deleteReward = (rewardId:number) => {
+    return this._delete(`/reward/$0`, {
+      pathInsert: [rewardId],
+    });
+  }
 
   // Vote System
   public vote (type:ReqData.Vote.type, id:number, attitude:ReqData.Vote.attitude) : Promise<ResData.Vote> {

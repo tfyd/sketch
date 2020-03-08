@@ -5,7 +5,7 @@ import { List } from '../../components/common/list';
 import { NavBar } from '../../components/common/navbar';
 import { MessageMenu } from './message-menu';
 import './style.scss';
-import { MarkAllAsRead } from './mark-all-as-read';
+import { Toolbar } from './toolbar';
 import { Menu, MenuItem } from '../../components/common/menu';
 import { RoutePath } from '../../../config/route-path';
 import { ResData } from '../../../config/api';
@@ -40,7 +40,7 @@ export class Message extends React.Component<MobileRouteProps, State> {
           <MessageMenu/>
         </NavBar>}>
 
-        <MarkAllAsRead />
+        <Toolbar />
 
         <Menu>
           <MenuItem icon="far fa-thumbs-up icon" title="点赞提醒"
