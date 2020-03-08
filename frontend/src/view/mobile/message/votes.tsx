@@ -70,7 +70,7 @@ export class Votes extends React.Component<MobileRouteProps, State> {
   public render () {
     return (<Page className="msg-page"
         top={<NavBar goBack={this.props.core.route.back}>
-          打赏提醒
+          点赞提醒
         </NavBar>}>
 
         <Toolbar
