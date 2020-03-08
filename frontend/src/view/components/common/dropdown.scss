@@ -11,6 +11,12 @@
   .dropdown-trigger.is-active {
     color: var(--color-primary)
   }
+  .dropdown-menu {
+    background-color: var(--color-bg-front);
+    position: absolute;
+    box-shadow: 0px 0px 9px -1px #c5c5c5;
+    z-index: 1;
+  }
   .item {
     padding: var(--padding-1);
   }
