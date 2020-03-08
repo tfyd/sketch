@@ -419,7 +419,8 @@ export namespace ResData {
       attitude:ReqData.Vote.attitude;
       created_at:Timestamp;
     };
-    author:User;
+    author?:User;
+    receiver?:User;
   }
 
   export interface Reward {

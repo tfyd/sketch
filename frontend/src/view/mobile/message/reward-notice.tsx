@@ -18,7 +18,7 @@ const filterOptions = [
   {text: '全部', value: 'all'},
   {text: '收到的打赏', value: 'received'},
   {text: '给出的打赏', value: 'sent'},
-]
+];
 
 export class RewardNotice extends React.Component<MobileRouteProps, State> {
   public state:State = {
@@ -69,7 +69,7 @@ export class RewardNotice extends React.Component<MobileRouteProps, State> {
           打赏提醒
         </NavBar>}>
 
-        < Toolbar
+        <Toolbar
           filterOptions={filterOptions}
           setFilterOption={this.setFilterOption}
         />
