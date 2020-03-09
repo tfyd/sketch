@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 import { validEmail } from '../../../utils/validates';
 import { Card } from '../common/card';
 import { NoticeBar } from '../common/notice-bar';
+import { RoutePath } from '../../../config/route-path';
+import { Button } from '../common/button';
+import { Colors } from '../../theme/theme';
+
 import './login.scss';
 // FIXME: internal server error will be treated as incorrect password 
 interface Props {
@@ -22,7 +26,7 @@ export class Login extends React.Component<Props, State> {
   };
 
   public render () {
-    return <Card className = 'login'>
+    return <Card className = "login">
         <div className="card-content">
 
 
@@ -50,7 +54,7 @@ export class Login extends React.Component<Props, State> {
 
         { this.state.errMsg && <NoticeBar>{this.state.errMsg}</NoticeBar> }
 
-        <a className="button color-primary login-button" onClick={async (ev) => {
+        <Button type='ellipse' color = {Colors.primary} onClick={() => async (ev) => {
           if (this.state.email === '') {
             this.setState({errMsg: '邮箱 不能为空。'});
           } else if (this.state.password === '') {
@@ -64,12 +68,11 @@ export class Login extends React.Component<Props, State> {
               this.setState({errMsg: '用户名或密码错误。'});
             }
           }
-        }}>登录</a>
+        }}>登录</Button>
 
-        <Link to="/register" className="register">注册</Link>
+        <Link to={RoutePath.register} className="register">注册</Link>
 
-        <Link to="reset_password"
-        className="forgot-password">忘记密码?</Link>
+        <Link to={RoutePath.reset_password} className="forgot-password">忘记密码?</Link>
 
       </div>
 

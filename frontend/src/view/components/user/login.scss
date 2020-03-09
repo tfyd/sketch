@@ -2,7 +2,7 @@
 
     height: 100%;
     margin-top: 0; 
-    padding: 10%;
+    padding: 10px;
     font-size: var(--font-size-2);
 
     .inputbox {
@@ -10,7 +10,7 @@
         height: 38px;
         margin-bottom: 12px;
         display: block;
-        background-color: #F4F5F9;
+        background-color:var(--color-bg-base);
         box-sizing: border-box;
         border-radius: 19px;
         padding-left: 12px;
@@ -20,7 +20,6 @@
         height: 38px; 
         margin-left: 8px;
         display: inline-block;
-        
         line-height: 38px;
         vertical-align: top;
     }
@@ -51,7 +50,7 @@
     .login-logo {
         width: 72px;
         height: 72px;
-        margin: 20% auto;
+        margin: 60px auto;
         background-size: 72px 72px;
         background-image:url("../../../../assets/login-logo.jpg");
     }
