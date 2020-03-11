@@ -30,7 +30,8 @@ export enum RoutePath {
   rewards = '/messages/reward',
 
   // my
-  FAQs = '/my/faq',
+  FAQs = '/my/faq/all',
+  FAQContent = '/my/faq/:key',
 
   // other
   tags = '/tags',

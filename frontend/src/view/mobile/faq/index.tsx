@@ -30,6 +30,7 @@ export class FAQ extends React.Component<MobileRouteProps, State> {
   }
 
   private renderFAQGroup(faqGroup, id) {
+    const history = this.props.core.history;
     const subTypes = Object.keys(faqGroup.children).sort();
     return (
       <div key={id} className="faqgroup">
@@ -37,7 +38,9 @@ export class FAQ extends React.Component<MobileRouteProps, State> {
         <Menu>
           { subTypes.map((subType) => (
             <MenuItem title={faqGroup.children[subType]}
-              onClick={() => 1}
+              onClick={() =>
+                history.push(
+                  RoutePath.FAQContent.replace(':key', `${id}-${subType}`),{faqs: this.state.data.faqs, typeName: faqGroup.children[subType]})}
               key={subType} />))}
         </Menu>
       </div>
