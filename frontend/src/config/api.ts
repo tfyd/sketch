@@ -474,6 +474,24 @@ export namespace ResData {
       critic_count:number;
     };
   }
+
+  export interface FAQ {
+    type:'faq';
+    id:number;
+    attributes:{
+      key:string;
+      question:string;
+      answer:string;
+    };
+  }
+  export interface FAQTypes {
+    [key:number]:{
+      title:'string';
+      children:{
+        [key:number]:string;
+      };
+    };
+  }
 }
 
 export namespace ReqData {

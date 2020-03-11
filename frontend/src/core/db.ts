@@ -561,6 +561,12 @@ export class DB {
     return this._get('/config/allChannels');
   }
 
+  // FIXME
+  // help faq system
+  public getFAQs = () => {
+    return this._get('/helpfaq');
+  }
+  // others
   public addQuote (body:{
     body:string;
     is_anonymous?:boolean;

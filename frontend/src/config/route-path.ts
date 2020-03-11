@@ -29,6 +29,9 @@ export enum RoutePath {
   votes = '/messages/vote',
   rewards = '/messages/reward',
 
+  // my
+  FAQs = '/my/faq',
+
   // other
   tags = '/tags',
   search = '/search',

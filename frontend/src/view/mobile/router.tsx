@@ -27,6 +27,9 @@ import { Reply } from '../components/thread/reply';
 import { Review } from '../components/thread/review';
 import { RewardNotice } from './message/reward-notice';
 
+// my
+import { FAQ } from './faq';
+
 interface Props {
   core:Core;
 }
@@ -76,6 +79,8 @@ export const MobileRoutes = {
   [RoutePath.votes]: Votes,
   [RoutePath.rewards]: RewardNotice,
 
+  // my
+  [RoutePath.FAQs]: FAQ,
   // other
   [RoutePath.tags]: ForumTags,
   [RoutePath.search]: SearchPage,
