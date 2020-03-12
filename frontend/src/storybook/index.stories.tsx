@@ -59,6 +59,7 @@ import { loadTestData, formatTestData } from '../test/bbcode/additionalTest';
 import { App } from '../view';
 import { MenuItem, Menu } from '../view/components/common/menu';
 import { HomeworkPreview } from '../view/components/home/homework-preview';
+import { Picker } from '../view/components/common/picker';
 
 const core = new Core();
 fakeDB(core.db);
@@ -389,7 +390,39 @@ storiesOf('Common Components', module)
         }
       />;
     }
-  })));
+  })))
+  .add('Picker', () => (React.createElement(
+    class extends React.Component<{}, {
+      showPicker:boolean,
+    }> {
+      public state = {
+        showPicker: false,
+      };
+
+      public show = () => {
+        this.setState({showPicker:  true});
+      }
+
+      public hide = () => {
+        this.setState({showPicker:  false});
+      }
+
+      public render() {
+        return (
+          <div>
+            <Button onClick={this.show}>显示 Picker</Button>
+            {
+              this.state.showPicker &&
+              <Picker
+                onClose={this.hide}
+                columns={[]}
+              />
+            }
+          </div>
+        );
+      }
+    },
+  )));
 
 storiesOf('Common Components/Notice Bar', module)
   .add('short message', () => <NoticeBar
