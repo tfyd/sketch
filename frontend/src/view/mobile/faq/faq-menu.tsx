@@ -8,53 +8,39 @@ import './style.scss';
 import { Menu, MenuItem } from '../../components/common/menu';
 import { RoutePath } from '../../../config/route-path';
 import { API, ResData } from '../../../config/api';
+import { Constant } from '../../../config/constant';
 
 interface State {
-  data:API.Get['/helpfaq'];
 }
 
-export class FAQ extends React.Component<MobileRouteProps, State> {
-  public state:State = {
-    data:{
-      faqs: [],
-      faq_keys: {},
-    },
-  };
+export class FAQMenu extends React.Component<MobileRouteProps, State> {
 
   // TODO: save faq data in localStorage
-  public async componentDidMount() {
-    const data = await this.props.core.cache.FAQ.get();
-    this.setState({data});
-    console.log(data);
-  }
 
   private renderFAQGroup(faqGroup, id) {
     const history = this.props.core.history;
-    const subTypes = Object.keys(faqGroup.children).sort();
     return (
       <div key={id} className="faqgroup">
         <div className="faqgroup-title">{`【${faqGroup.title}】`}</div>
         <Menu>
-          { subTypes.map((subType) => (
-            <MenuItem title={faqGroup.children[subType]}
+          { faqGroup.children.map((subType, i) => (
+            <MenuItem title={subType.title}
               onClick={() =>
                 history.push(
-                  RoutePath.FAQContent.replace(':key', `${id}-${subType}`), {faqs: this.state.data.faqs, typeName: faqGroup.children[subType]})}
-              key={subType} />))}
+                  RoutePath.FAQContent.replace(':key', `${id}-${i}`))}
+              key={i} />))}
         </Menu>
       </div>
     );
   }
   public render () {
-    const { faq_keys } = this.state.data;
-    const types = Object.keys(faq_keys).sort();
     return (<Page
         top={<NavBar goBack={this.props.core.route.back}>
           帮助FAQ
         </NavBar>}>
 
-        { types.map((type) => (
-          (this.renderFAQGroup(faq_keys[type], type))
+        { Constant.FAQTypes.map((type, i) => (
+          (this.renderFAQGroup(type, i))
         ))}
       </Page>);
   }

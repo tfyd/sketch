@@ -3,6 +3,7 @@ import { loadStorage, saveStorage, Storage, CacheData, allocStorage } from '../u
 import { ResData, API } from '../config/api';
 
 // TODO: CacheHandler is based on filterHandler, refactor the two files later
+// TODO: use version nummber to force frontend clear all cache even before expiredTime
 class CacheHandler<T> {
   protected db:DB;
   protected data:CacheData<T> | null = null;

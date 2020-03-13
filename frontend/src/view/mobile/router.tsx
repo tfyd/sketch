@@ -28,7 +28,7 @@ import { Review } from '../components/thread/review';
 import { RewardNotice } from './message/reward-notice';
 
 // my
-import { FAQ } from './faq';
+import { FAQMenu } from './faq/faq-menu';
 import { FAQContent } from './faq/faq-content';
 
 interface Props {
@@ -81,7 +81,7 @@ export const MobileRoutes = {
   [RoutePath.rewards]: RewardNotice,
 
   // my
-  [RoutePath.FAQs]: FAQ,
+  [RoutePath.FAQMenu]: FAQMenu,
   [RoutePath.FAQContent]: FAQContent,
   // other
   [RoutePath.tags]: ForumTags,
