@@ -23,8 +23,7 @@ export class FAQ extends React.Component<MobileRouteProps, State> {
 
   // TODO: save faq data in localStorage
   public async componentDidMount() {
-    const { getFAQs } = this.props.core.db;
-    const data = await getFAQs();
+    const data = await this.props.core.cache.FAQ.get();
     this.setState({data});
     console.log(data);
   }
@@ -40,14 +39,13 @@ export class FAQ extends React.Component<MobileRouteProps, State> {
             <MenuItem title={faqGroup.children[subType]}
               onClick={() =>
                 history.push(
-                  RoutePath.FAQContent.replace(':key', `${id}-${subType}`),{faqs: this.state.data.faqs, typeName: faqGroup.children[subType]})}
+                  RoutePath.FAQContent.replace(':key', `${id}-${subType}`), {faqs: this.state.data.faqs, typeName: faqGroup.children[subType]})}
               key={subType} />))}
         </Menu>
       </div>
     );
   }
   public render () {
-    const history = this.props.core.history;
     const { faq_keys } = this.state.data;
     const types = Object.keys(faq_keys).sort();
     return (<Page

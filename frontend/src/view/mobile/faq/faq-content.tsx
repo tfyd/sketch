@@ -11,14 +11,27 @@ import { API, ResData } from '../../../config/api';
 import { ExpandableMessage } from '../../components/message/expandable-message';
 
 interface State {
-  faqs:ResData.FAQ[];
+  typeName:string;
+  filteredFaqs:ResData.FAQ[];
 }
 
 export class FAQContent extends React.Component<MobileRouteProps, State> {
-  public render () {
-    const { faqs, typeName } = this.props.location.state as any;
+  public state:State = {
+    typeName: '',
+    filteredFaqs: [],
+  };
+
+  public async componentDidMount() {
+    const data = await this.props.core.cache.FAQ.get();
+    const { faqs } = data;
     const typeKey = this.props.match.params.key;
     const filteredFaqs = faqs.filter( (f) => f.attributes.key == typeKey );
+    const { typeName } = this.props.location.state as any;
+    this.setState({ typeName, filteredFaqs });
+  }
+
+  public render() {
+    const { typeName, filteredFaqs } = this.state;
     return (<Page
         top={<NavBar goBack={this.props.core.route.back}>
           {typeName}

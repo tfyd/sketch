@@ -2,6 +2,7 @@ import { DB } from './db';
 import { loadStorage, saveStorage, Storage, CacheData, allocStorage } from '../utils/storage';
 import { ResData, API } from '../config/api';
 
+// TODO: CacheHandler is based on filterHandler, refactor the two files later
 class CacheHandler<T> {
   protected db:DB;
   protected data:CacheData<T> | null = null;
@@ -24,6 +25,7 @@ class CacheHandler<T> {
 
   // init is called in "get" for lazy initialization
   public _init () {
+    // FIXME: do not use type any
     const data:CacheData<T> = loadStorage(this.key) as any;
     this.data = data;
   }
@@ -43,6 +45,7 @@ class CacheHandler<T> {
   }
 
   public async get () : Promise<T> {
+    await this.updateData();
     if (this.data) {
       return this.data.data;
     } else {
