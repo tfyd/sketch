@@ -484,14 +484,6 @@ export namespace ResData {
       answer:string;
     };
   }
-  export interface FAQTypes {
-    [key:number]:{
-      title:'string';
-      children:{
-        [key:number]:string;
-      };
-    };
-  }
 }
 
 export namespace ReqData {

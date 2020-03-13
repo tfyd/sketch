@@ -51,10 +51,7 @@ export function allocStorage () : Storage {
     },
     faq: {
       updated_at: 0,
-      data: {
-        faqs: [],
-        faq_keys: {},
-      },
+      data: [],
     },
   };
 }
