@@ -1,11 +1,16 @@
 import { Themes } from '../view/theme/theme';
-import { ResData } from '../config/api';
+import { API, ResData } from '../config/api';
 
 type Timestamp = number;
 export type FilterDataType<T> = {
   updated_at:number;
   list:T[];
   selectedList:number[];
+};
+
+export type CacheData<T> = {
+  updated_at:number;
+  data:T;
 };
 
 export interface Storage {
@@ -18,6 +23,7 @@ export interface Storage {
   tag:FilterDataType<ResData.Tag>;
   channel:FilterDataType<ResData.Channel>;
   bianyuan:FilterDataType<{id:number, name:string}>;
+  faq:CacheData<API.Get['/helpfaq']>;
 }
 
 export function allocStorage () : Storage {
@@ -42,6 +48,13 @@ export function allocStorage () : Storage {
       updated_at: 0,
       list: [],
       selectedList: [],
+    },
+    faq: {
+      updated_at: 0,
+      data: {
+        faqs: [],
+        faq_keys: {},
+      },
     },
   };
 }
