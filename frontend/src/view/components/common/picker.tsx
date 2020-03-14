@@ -5,13 +5,19 @@ import './popup-menu.scss';
 import './picker.scss';
 
 interface Item {
-  label:string | React.ReactNode;
+  label:string;
   value:string;
+}
+
+interface Column {
+  prefix?:React.ReactNode;
+  suffix?:React.ReactNode;
+  column:(prevValues:string[]) => Item[];
 }
 
 interface Props {
   onClose:() => void;
-  columns:((prevValues:string[]) => Item[])[];
+  columns:Column[];
 }
 
 interface State {
