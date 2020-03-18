@@ -415,7 +415,16 @@ storiesOf('Common Components', module)
               this.state.showPicker &&
               <Picker
                 onClose={this.hide}
-                columns={[]}
+                columnOpts={[
+                  {
+                    key: '1',
+                    on: () => [1, 2, 3, 4].map((v) => ({label: v, value:v.toString()})),
+                  },
+                  {
+                    key: '2',
+                    on: () => [5, 6, 7, 8].map((v) => ({label: v, value:v.toString()})),
+                  },
+                ]}
               />
             }
           </div>

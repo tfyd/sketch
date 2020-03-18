@@ -5,19 +5,44 @@ import './popup-menu.scss';
 import './picker.scss';
 
 interface Item {
-  label:string;
+  label:React.ReactNode;
   value:string;
 }
 
-interface Column {
-  prefix?:React.ReactNode;
-  suffix?:React.ReactNode;
-  column:(prevValues:string[]) => Item[];
+interface ColumnProp {
+  itemHeight:number;
+  height:number;
+  items:Item[];
+  onChange:(value:string) => void;
+}
+
+interface ColumnState {
+
+}
+
+class Cloumn extends React.Component<ColumnProp, ColumnState> {
+  public render() {
+    return <div className="column" style={{height: this.props.height}}>
+      <div className="items"  style={{padding: `${(this.props.height - this.props.itemHeight) / 2}px 0`}}>
+        {this.props.items.map((item) => <div className="item"
+          style={{height: this.props.itemHeight, lineHeight: `${this.props.itemHeight}px`}} key={item.value}>
+            {item.label}
+        </div>)}
+      </div>
+    </div>;
+  }
+}
+
+interface ColumnOpt {
+  key:string;
+  on:(prevValues:string[]) => Item[];
 }
 
 interface Props {
+  itemHeight?:number;
+  height?:number;
   onClose:() => void;
-  columns:Column[];
+  columnOpts:ColumnOpt[];
 }
 
 interface State {
@@ -33,6 +58,8 @@ export class Picker extends React.Component<Props, State> {
 
   public render() {
     const name = this.state.onClosing ? 'slideOutDown' : 'slideInUp';
+    const itemHeight = this.props.itemHeight || 30;
+    const height = this.props.height || 300;
     return <div className="popupMenu-wrapper picker">
       <div className="background" onClick={this.onClose}></div>
       <Animate name={name}  className="picker-animate" speed="faster">
@@ -41,12 +68,15 @@ export class Picker extends React.Component<Props, State> {
             <div onClick={this.onClose}> 取消 </div>
             <div onClick={this.onClose}> 完成 </div>
           </div>
-          <div className="columns-container">
+          <div className="columns-container"  style={{height: height}}>
             <div className="indicator-container">
-              <div className="indicator"/>
+              <div className="indicator" style={{height: itemHeight}}/>
             </div>
-            <div className="columns" onClick={() => console.log('click')}>
-
+            <div className="columns">
+              {this.props.columnOpts.map((opt) => {
+                return <Cloumn items={opt.on([])} height={height}
+                  itemHeight={itemHeight} onChange={() => {}} key={opt.key} />;
+              })}
             </div>
           </div>
         </div>
