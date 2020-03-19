@@ -59,7 +59,7 @@ import { loadTestData, formatTestData } from '../test/bbcode/additionalTest';
 import { App } from '../view';
 import { MenuItem, Menu } from '../view/components/common/menu';
 import { HomeworkPreview } from '../view/components/home/homework-preview';
-import { Picker } from '../view/components/common/picker';
+import { Picker, Item } from '../view/components/common/picker';
 
 const core = new Core();
 fakeDB(core.db);
@@ -407,6 +407,22 @@ storiesOf('Common Components', module)
         this.setState({showPicker:  false});
       }
 
+      public confirm = (v) => {
+        this.hide();
+        console.log(v);
+      }
+
+      public generateItems = (max:number) => {
+        const items:Item[]= [];
+        for (let index = 0; index < max; index++) {
+          items.push({
+            label: index,
+            value: index.toString(),
+          });
+        }
+        return items;
+      }
+
       public render() {
         return (
           <div>
@@ -414,15 +430,20 @@ storiesOf('Common Components', module)
             {
               this.state.showPicker &&
               <Picker
-                onClose={this.hide}
+                onCancel={this.hide}
+                onConfirm={this.confirm}
                 columnOpts={[
                   {
                     key: '1',
-                    on: () => [1, 2, 3, 4].map((v) => ({label: v, value:v.toString()})),
+                    items: () => this.generateItems(10),
                   },
                   {
                     key: '2',
-                    on: () => [5, 6, 7, 8].map((v) => ({label: v, value:v.toString()})),
+                    items: (selectedValue) => selectedValue['1'] ? this.generateItems(Number.parseInt(selectedValue['1'])) :[],
+                  },
+                  {
+                    key: '3',
+                    items: (selectedValue) => selectedValue['2'] ? this.generateItems(Number.parseInt(selectedValue['2'])) :[],
                   },
                 ]}
               />

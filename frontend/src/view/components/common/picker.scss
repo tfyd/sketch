@@ -32,14 +32,24 @@
                 left: 0;
                 top: 0;
                 display: flex;
+                flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 pointer-events: none;
-                //background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.6)), linear-gradient(to top, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.6));
-                .indicator {
+                div {
                     width: 100%;
+                }
+                .indicator {
                     border-top: 1px solid var(--color-border);
                     border-bottom: 1px solid var(--color-border);
+                }
+                .top {
+                    flex: 1;
+                    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.6));
+                }
+                .bottom {
+                    flex: 1;
+                    background-image: linear-gradient(to top, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.6));
                 }
             }
             .columns {
@@ -47,12 +57,16 @@
                 width: 100%;
                 .column {
                     flex: 1;
-                    .items {
-                        .item {
-                            text-align: center;
-                            vertical-align: middle;
-                        }
+                    overflow-y: scroll;
+                    scroll-snap-type: y mandatory;
+                    .item {
+                        text-align: center;
+                        vertical-align: middle;
+                        scroll-snap-align: center;
                     }
+                }
+                .column::-webkit-scrollbar {
+                    display: none
                 }
             }
         }
