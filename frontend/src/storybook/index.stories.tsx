@@ -370,7 +370,7 @@ storiesOf('Common Components', module)
       };
       return <div>
         <Toast visible onClose={this.onClose} style={style} type="error" content="Banner_error"/>
-        <Toast visible onClose={this.onClose} style={style} type="warning" content="Banner_warning"/>
+        <Toast onClose={this.onClose} style={style} type="warning" content="Banner_warning"/>
         <Toast visible onClose={this.onClose} style={style} type="success" content="Banner_success"/>
         <Toast visible onClose={this.onClose} style={style} type="regular" content={
           `123456789009876543211234567890 只咸鱼已到帐，
