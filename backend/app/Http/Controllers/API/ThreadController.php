@@ -33,8 +33,8 @@ class ThreadController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth:api')->except(['index', 'show','channel_index', 'thread_index']);
-        $this->middleware('filter_thread')->only('show');
+        $this->middleware('auth:api')->except(['index', 'show', 'show_profile', 'channel_index', 'thread_index']);
+        $this->middleware('filter_thread')->only(['show', 'show_profile']);
     }
 
     public function test($id)
