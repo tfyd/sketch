@@ -36,15 +36,15 @@ class Cloumn extends React.Component<ColumnProp> {
   }
 
   public render() {
-    const topBottonPadding = `${(this.props.height - this.props.itemHeight) / 2}px`;
+    const topBottomPadding = `${(this.props.height - this.props.itemHeight) / 2}px`;
     return <div className="column" style={{height: this.props.height}}
       onScroll={this.onScroll} ref={this.ref}>
         {this.props.items.map((item, index) => <div className="item"
           style={{
             height: this.props.itemHeight,
             lineHeight: `${this.props.itemHeight}px`,
-            paddingTop: index === 0 ? topBottonPadding :'0',
-            paddingBottom: index === this.props.items.length - 1 ? topBottonPadding :'0',
+            paddingTop: index === 0 ? topBottomPadding :'0',
+            paddingBottom: index === this.props.items.length - 1 ? topBottomPadding :'0',
           }} key={item.value}>
             {item.label}
         </div>)}
