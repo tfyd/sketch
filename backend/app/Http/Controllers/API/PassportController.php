@@ -160,7 +160,7 @@ class PassportController extends Controller
         }
         if($request->invitation_type==='email'){
 
-            if(!request('email')||!request('token')){abort(422,'缺少必要的信息，不能定位申请记录')}
+            if(!request('email')||!request('token')) { abort(422,'缺少必要的信息，不能定位申请记录'); }
             $application = \App\Models\RegistrationApplication::where('email',request('email'))->where('token',request('token'))->first();
 
             if(!$application){abort(404,'不存在对应的申请记录');}
