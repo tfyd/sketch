@@ -58,7 +58,7 @@ import { bbcodTestCases } from '../test/bbcode/bbcode';
 import { loadTestData, formatTestData } from '../test/bbcode/additionalTest';
 import { App } from '../view';
 import { MenuItem, Menu } from '../view/components/common/menu';
-import { Toast } from '../view/components/common/toast';
+import { NoticeType, notice } from '../view/components/common/notice';
 import { HomeworkPreview } from '../view/components/home/homework-preview';
 
 const core = new Core();
@@ -359,25 +359,26 @@ storiesOf('Common Components', module)
       <MenuItem icon="fas fa-gift icon" title="打赏提醒" badgeNum={1} />
     </Menu>
   ))
-  .add('Toast', () => (React.createElement(class extends React.Component {
-    public onClose = () => {
-      console.log('onclose');
+  .add('Notice', () => (React.createElement(class extends React.Component<{}, {content:string}> {
+    public state = {
+      content:'message content',
+    };
+
+    public onChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+      this.setState({
+        content: event.target.value,
+      });
     }
 
     public render() {
-      const style:React.CSSProperties = {
-        marginBottom: '20px',
-      };
       return <div>
-        <Toast visible onClose={this.onClose} style={style} type="error" content="Banner_error"/>
-        <Toast onClose={this.onClose} style={style} type="warning" content="Banner_warning"/>
-        <Toast visible onClose={this.onClose} style={style} type="success" content="Banner_success"/>
-        <Toast visible onClose={this.onClose} style={style} type="regular" content={
-          `123456789009876543211234567890 只咸鱼已到帐，
-          123456789009876543211234567890 颗盐粒已到帐，
-          123456789009876543211234567890 条火腿已到帐，
-          等级升至 12345678900987654321 级。`
-        }/>
+        <input value={this.state.content} onChange={this.onChange}/>
+        {
+          Object.keys(NoticeType).map((value:string) => <button key={value}
+            onClick={() => notice.addNotice(this.state.content, value as NoticeType, 5000) }>
+              {value}
+            </button>)
+        }
       </div>;
     }
   },

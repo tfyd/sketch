@@ -21,7 +21,7 @@
 $error-color: #CE565D;
 $warning-color: #F08E5E;
 $success-color: #2DD09F;
-$regular-color: #DDDFE6;
+$info-color: #DDDFE6;
 @mixin toast-color($color) {
     .icon-info {
         color: $color;
@@ -41,6 +41,6 @@ $regular-color: #DDDFE6;
     @include toast-color($success-color)
 }
 
-.regular {
-    @include toast-color($regular-color)
+.info {
+    @include toast-color($info-color)
 }
