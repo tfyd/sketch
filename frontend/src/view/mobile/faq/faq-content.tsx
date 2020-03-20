@@ -4,7 +4,7 @@ import { Page } from '../../components/common/page';
 import { NavBar } from '../../components/common/navbar';
 import '../message/style.scss'; // TODO: extract common scss out
 import './style.scss';
-import { API, ResData } from '../../../config/api';
+import { ResData } from '../../../config/api';
 import { ExpandableMessage } from '../../components/message/expandable-message';
 import { Constant } from '../../../config/constant';
 
@@ -21,6 +21,7 @@ export class FAQContent extends React.Component<MobileRouteProps, State> {
 
   public async componentDidMount() {
     const faqs = await this.props.core.cache.FAQ.get();
+    console.log(faqs);
     const typeKey:string = this.props.match.params.key;
 
     // get type name

@@ -1,13 +1,11 @@
 import * as React from 'react';
 import { MobileRouteProps } from '../router';
 import { Page } from '../../components/common/page';
-import { List } from '../../components/common/list';
 import { NavBar } from '../../components/common/navbar';
 import '../message/style.scss'; // TODO: extract common scss out
 import './style.scss';
 import { Menu, MenuItem } from '../../components/common/menu';
 import { RoutePath } from '../../../config/route-path';
-import { API, ResData } from '../../../config/api';
 import { Constant } from '../../../config/constant';
 
 interface State {

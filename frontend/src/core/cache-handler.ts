@@ -1,6 +1,5 @@
-import { DB } from './db';
+import { DB, DBResponse } from './db';
 import { loadStorage, saveStorage, Storage, CacheData, allocStorage } from '../utils/storage';
-import { ResData, API } from '../config/api';
 
 // TODO: CacheHandler is based on filterHandler, refactor the two files later
 // TODO: use version nummber to force frontend clear all cache even before expiredTime
@@ -70,7 +69,7 @@ class CacheHandler<T> {
   }
 }
 
-export class FAQHandler extends CacheHandler<API.Get['/helpfaq']> {
+export class FAQHandler extends CacheHandler<DBResponse<'getFAQs'>> {
   constructor (db:DB) {
     super(
       db,

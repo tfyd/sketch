@@ -61,18 +61,18 @@ export namespace ResData {
   }
 
   export interface Reward {
-    id:number;
     type:'reward';
+    id:number;
     attributes:{
-      'rewardable_type':string;
-      'rewardable_id':number;
-      'reward_value':number;
-      'reward_type':string;
-      'created_at':Timestamp;
-      'deleted_at':Timestamp;
+      rewardable_type:ReqData.Reward.rewardableType;
+      rewardable_id:number;
+      reward_type:ReqData.Reward.rewardType;
+      reward_value:number;
+      created_at:Timestamp;
+      deleted_at:Timestamp;
     };
-    author:User[];
-    receiver:User[];
+    author?:User;   //available at reward_received
+    receiver?:User; //available at reward_sent
   }
 
   export function allocReward () : Reward {
@@ -80,15 +80,14 @@ export namespace ResData {
       id: 0,
       type: 'reward',
       attributes: {
-        rewardable_type: '',
+        rewardable_type: ReqData.Reward.rewardableType.post,
         rewardable_id: 0,
         reward_value: 0,
-        reward_type: '',
+        reward_type: ReqData.Reward.rewardType.fish,
         created_at: '',
         deleted_at: '',
       },
-      author: [],
-      receiver: [],
+      author: allocUser(),
     };
   }
 

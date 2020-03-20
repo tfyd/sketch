@@ -5,13 +5,13 @@ import { List } from '../../components/common/list';
 import { NavBar } from '../../components/common/navbar';
 import './style.scss';
 import { DBResponse } from '../../../core/db';
-import { API, ResData } from '../../../config/api';
+import { ResData } from '../../../config/api';
 import { VoteItem } from './vote-item';
 import { Toolbar } from './toolbar';
 
 interface State {
-  votesReceived:API.Get['/user/$0/vote_received'];
-  votesSent:API.Get['/user/$0/vote_sent'];
+  votesReceived:DBResponse<'getUserVotesReceived'>;
+  votesSent:DBResponse<'getUserVotesSent'>;
   filter:filterType;
 }
 type filterType = 'all' | 'received' | 'sent';

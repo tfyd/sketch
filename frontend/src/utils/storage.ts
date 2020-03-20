@@ -1,5 +1,6 @@
 import { Themes } from '../view/theme/theme';
-import { API, ResData } from '../config/api';
+import { ResData } from '../config/api';
+import { DBResponse } from '../core/db';
 
 type Timestamp = number;
 export type FilterDataType<T> = {
@@ -23,7 +24,7 @@ export interface Storage {
   tag:FilterDataType<ResData.Tag>;
   channel:FilterDataType<ResData.Channel>;
   bianyuan:FilterDataType<{id:number, name:string}>;
-  faq:CacheData<API.Get['/helpfaq']>;
+  faq:CacheData<DBResponse<'getFAQs'>>;
 }
 
 export function allocStorage () : Storage {

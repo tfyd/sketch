@@ -1,15 +1,16 @@
 import * as React from 'react';
-import { API, ResData, ReqData } from '../../../config/api';
+import { ResData } from '../../../config/api';
 import { MobileRouteProps } from '../router';
 import { Page } from '../../components/common/page';
 import { NavBar } from '../../components/common/navbar';
 import { List } from '../../components/common/list';
 import { Toolbar } from './toolbar';
 import { RewardItem } from './reward-item';
+import { DBResponse } from '../../../core/db';
 
 interface State {
-  rewardsReceived:API.Get['/user/$0/reward_received'];
-  rewardsSent:API.Get['/user/$0/reward_sent'];
+  rewardsReceived:DBResponse<'getUserRewardsReceived'>;
+  rewardsSent:DBResponse<'getUserRewardsSent'>;
   filter:filterType;
 }
 
