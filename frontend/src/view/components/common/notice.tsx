@@ -5,6 +5,8 @@ import { setIdleTimeout } from '../../../utils/timer';
 import './notice.scss';
 import { ToastProps, Toast, ToastType as NoticeType } from './toast';
 export { ToastType as NoticeType } from './toast';
+import '../../theme/index.scss';
+import { loadStorage } from '../../../utils/storage';
 
 type NoticeProps = {
   noticeList:NoticeConfig[];
@@ -16,17 +18,7 @@ interface NoticeConfig extends ToastProps {
 
 const noticeList:NoticeConfig[] = [];
 const localContainer = document.createElement('div');
-// tslint:disable-next-line: no-floating-promises
-(async () => {
-  while (true) {
-    const app = document.getElementById('app');
-    if (app) {
-      app.appendChild(localContainer);
-      break;
-    }
-    await new Promise((resolve) => setTimeout(resolve, 10));
-  }
-})();
+document.body.appendChild(localContainer);
 
 class Notice extends React.Component<NoticeProps, {}> {
   public render () {
@@ -68,9 +60,17 @@ function closeNotice (id:string) {
   }
 }
 
+let noticeTheme = loadStorage('theme') || 'light';
+export const updateNoticeTheme = (theme) => {
+  noticeTheme = theme;
+  render();
+};
+
 function render() {
   const localDom = (
-    <Notice noticeList={noticeList}/>
+    <div className={`theme-${noticeTheme}`} data-theme={noticeTheme}>
+      <Notice noticeList={noticeList}/>
+    </div>
   );
   ReactDOM.render(localDom, localContainer);
 }
