@@ -57,6 +57,7 @@ import { bbcode2html, html2bbcode, test } from '../utils/text-formater';
 import { bbcodTestCases } from '../test/bbcode/bbcode';
 import { loadTestData, formatTestData } from '../test/bbcode/additionalTest';
 import { App } from '../view';
+import { Reward } from '../view/components/thread/reward';
 import { MenuItem, Menu } from '../view/components/common/menu';
 import { HomeworkPreview } from '../view/components/home/homework-preview';
 
@@ -786,7 +787,32 @@ storiesOf('Thread Components', module)
       onUserClick={action('onUserClick')}
     />
   </Card>)
-;
+  .add('Reward', () => (React.createElement(class extends React.Component<{}, {showReward:boolean}> {
+    public state= {
+      showReward: false,
+    };
+
+    public changeShow = (showReward:boolean) => {
+      this.setState({
+        showReward,
+      });
+    }
+
+    public render() {
+      return <div>
+        <button onClick={() => this.changeShow(true)}>打赏</button>
+        {
+          this.state.showReward && <Reward
+            onClose={() => this.changeShow(false)}
+            salt={5345}
+            fish={548857}
+            ham={5849}
+            onReward={(type, num) => console.log(type, num)}
+          />
+        }
+      </div>;
+    }
+  })));
 
 storiesOf('Message Components', module)
   .add('chatBubble', () =>
