@@ -39,9 +39,9 @@ export class Reward extends React.Component<Props, State> {
   }
 
   public validate = () => {
-    const count = parseInt(this.state.value);
+    const count = parseFloat(this.state.value);
     if (this.state.selected && this.rewards.findIndex((v) => v[0] === this.state.selected) >= 0
-      && !isNaN(count) && count > 0 && count <= Math.min(100, this.props[this.state.selected])) {
+      && !isNaN(count) && Number.isInteger(count) && count > 0 && count <= Math.min(100, this.props[this.state.selected])) {
         return count;
     }
     return -1;
