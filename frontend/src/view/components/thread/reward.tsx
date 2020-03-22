@@ -24,7 +24,7 @@ export class Reward extends React.Component<Props, State> {
     value:'',
   };
 
-  public rewards = [['salt', '盐粒'], ['fish', '咸鱼'], ['ham', '火腿']];
+  public rewards:[RewardType, string][] = [['salt', '盐粒'], ['fish', '咸鱼'], ['ham', '火腿']];
 
   public onSelect = (type:RewardType) => {
     this.setState({
@@ -68,7 +68,7 @@ export class Reward extends React.Component<Props, State> {
             (value) => {
               const [rewardType, name] = value;
               return <div className="reward-item"
-                onClick={() => this.onSelect(rewardType as RewardType)}>
+                onClick={() => this.onSelect(rewardType)}>
                 <input type="radio" name="reward" value={rewardType}
                   checked={this.state.selected === rewardType} readOnly/>
                 {name} (余额 <span> {this.props[rewardType]} </span> )
