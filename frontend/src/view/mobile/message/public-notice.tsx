@@ -29,11 +29,11 @@ export class PublicNotice extends React.Component<MobileRouteProps, State> {
     } else {
       publicNoticeData = await this.props.core.db.getPublicNotice()
                                 .catch((e) => {
-                                  console.log(e);
+                                  // console.log(e);
                                   return this.state.publicNoticeData;
                                 });
     }
-    console.log(publicNoticeData);
+    // console.log(publicNoticeData);
     this.setState({publicNoticeData});
   }
 

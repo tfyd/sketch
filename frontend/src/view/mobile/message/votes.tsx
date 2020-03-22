@@ -15,7 +15,7 @@ interface State {
   filter:filterType;
 }
 type filterType = 'all' | 'received' | 'sent';
-const filterOptions = [
+const filterOptions:{text:string, value:filterType}[] = [
   {text: '全部', value: 'all'},
   {text: '收到的赞', value: 'received'},
   {text: '给出的赞', value: 'sent'},
@@ -35,17 +35,17 @@ export class Votes extends React.Component<MobileRouteProps, State> {
     const { getUserVotesReceived, getUserVotesSent } = this.props.core.db;
     const fetchVotesReceived = getUserVotesReceived()
       .catch((e) => {
-        console.log(e);
+        // console.log(e);
         return this.state.votesReceived;
       });
     const fetchVotesSent = getUserVotesSent()
       .catch((e) => {
-        console.log(e);
+        // console.log(e);
         return this.state.votesSent;
       });
     const [votesReceived, votesSent] = await Promise.all([fetchVotesReceived, fetchVotesSent]);
     this.setState({votesReceived, votesSent});
-    console.log(votesReceived, votesSent);
+    // console.log(votesReceived, votesSent);
   }
 
   public deleteVote = (voteId:number) => async () => {
@@ -59,7 +59,7 @@ export class Votes extends React.Component<MobileRouteProps, State> {
       votesSent = await this.props.core.db.getUserVotesSent();
       this.setState({votesSent});
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
   }
 

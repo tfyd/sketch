@@ -38,17 +38,17 @@ export class PersonalMessage extends React.Component<MobileRouteProps, State> {
     const query = {withStyle: ReqData.Message.style.receiveBox};
     const fetchMsgData = getMessages(query)
       .catch((e) => {
-        console.log(e);
+        // console.log(e);
         return this.state.messageData;
       });
     const fetchPublicNotice = getPublicNotice()
       .catch((e) => {
-        console.log(e);
+        // console.log(e);
         return this.state.publicNoticeData;
       });
     const [messageData, publicNoticeData] = await Promise.all([fetchMsgData, fetchPublicNotice]);
     this.setState({messageData, publicNoticeData});
-    console.log(messageData, publicNoticeData);
+    // console.log(messageData, publicNoticeData);
   }
 
   public render () {

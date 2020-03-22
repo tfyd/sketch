@@ -2,6 +2,12 @@ import { DB, DBResponse } from './db';
 import { loadStorage, saveStorage, Storage, CacheData, allocStorage } from '../utils/storage';
 
 // TODO: CacheHandler is based on filterHandler, refactor the two files later
+// 可以在filterHandler的constructor构建时引入cache对象
+// private _cache:CacheHandler;
+// constructor (cache:CacheHandler) {
+//   this._cache = cache;
+// }
+
 // TODO: use version nummber to force frontend clear all cache even before expiredTime
 class CacheHandler<T> {
   protected db:DB;
@@ -39,7 +45,7 @@ class CacheHandler<T> {
         const res = await this.loadData();
         this.save(res);
       } catch (e) {
-        console.log(e);
+        // console.log(e);
       }
     }
   }

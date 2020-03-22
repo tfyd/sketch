@@ -28,7 +28,7 @@ export class Message extends React.Component<MobileRouteProps, State> {
     const { getActivities } = this.props.core.db;
     const activities = await getActivities();
     this.setState({activities});
-    console.log(activities);
+    // console.log(activities);
   }
   public render () {
     const history = this.props.core.history;

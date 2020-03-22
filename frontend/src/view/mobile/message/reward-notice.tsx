@@ -15,7 +15,7 @@ interface State {
 }
 
 type filterType = 'all' | 'received' | 'sent';
-const filterOptions = [
+const filterOptions:{text:string, value:filterType}[] = [
   {text: '全部', value: 'all'},
   {text: '收到的打赏', value: 'received'},
   {text: '给出的打赏', value: 'sent'},
@@ -32,17 +32,17 @@ export class RewardNotice extends React.Component<MobileRouteProps, State> {
     const { getUserRewardsReceived, getUserRewardsSent } = this.props.core.db;
     const fetchRewardsReceived = getUserRewardsReceived()
       .catch((e) => {
-        console.log(e);
+        // console.log(e);
         return this.state.rewardsReceived;
       });
     const fetchRewardsSent = getUserRewardsSent()
       .catch((e) => {
-        console.log(e);
+        // console.log(e);
         return this.state.rewardsSent;
       });
     const [rewardsReceived, rewardsSent] = await Promise.all([fetchRewardsReceived, fetchRewardsSent]);
     this.setState({rewardsReceived, rewardsSent});
-    console.log(rewardsReceived, rewardsSent);
+    // console.log(rewardsReceived, rewardsSent);
   }
 
   public deleteReward = (rewardId:number) => async () => {
@@ -56,7 +56,7 @@ export class RewardNotice extends React.Component<MobileRouteProps, State> {
       rewardsSent = await this.props.core.db.getUserRewardsSent();
       this.setState({rewardsSent});
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
   }
 
