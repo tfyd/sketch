@@ -58,6 +58,7 @@ import { bbcodTestCases } from '../test/bbcode/bbcode';
 import { loadTestData, formatTestData } from '../test/bbcode/additionalTest';
 import { App } from '../view';
 import { MenuItem, Menu } from '../view/components/common/menu';
+import { NoticeType, notice } from '../view/components/common/notice';
 import { HomeworkPreview } from '../view/components/home/homework-preview';
 
 const core = new Core();
@@ -358,6 +359,30 @@ storiesOf('Common Components', module)
       <MenuItem icon="fas fa-gift icon" title="打赏提醒" badgeNum={1} />
     </Menu>
   ))
+  .add('Notice', () => (React.createElement(class extends React.Component<{}, {content:string}> {
+    public state = {
+      content:'message content',
+    };
+
+    public onChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+      this.setState({
+        content: event.target.value,
+      });
+    }
+
+    public render() {
+      return <div>
+        <input value={this.state.content} onChange={this.onChange}/>
+        {
+          Object.keys(NoticeType).map((value:string) => <button key={value}
+            onClick={() => notice.addNotice(this.state.content, value as NoticeType, 5000) }>
+              {value}
+            </button>)
+        }
+      </div>;
+    }
+  },
+  )))
   .add('InputText', () => (React.createElement(class extends React.Component<{}, { value:string }> {
     public state = {
       value: '',

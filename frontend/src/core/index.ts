@@ -7,6 +7,7 @@ import { TagHandler, ChannelHandler, BianyuanHandler } from './filter-handler';
 import { Route } from './route';
 import { saveStorage } from '../utils/storage';
 import { Themes } from '../view/theme/theme';
+import { updateNoticeTheme } from '../view/components/common/notice';
 const debounce = require('lodash/debounce');
 
 export type Filters = {
@@ -52,6 +53,7 @@ export class Core {
   }
 
   public switchTheme (theme:Themes) {
+    updateNoticeTheme(theme);
     const appElement = document.getElementById('app');
     if (appElement) {
       appElement.setAttribute('class', `theme-${theme}`);
