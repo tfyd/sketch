@@ -1,5 +1,6 @@
 <?php
-
+// Frontend config copy: /frontend/src/config/constant.ts  FAQTypes
+// please update both frontend and backend configs
 return [
     1 => [
         'title' => '基本问题/账户问题',

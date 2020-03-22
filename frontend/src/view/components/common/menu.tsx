@@ -6,7 +6,7 @@ const badgeStyle:React.CSSProperties = {float:'right'};
 
 export function MenuItem (props:{
   onClick?:( params? ) => void,
-  icon:string,
+  icon?:string,
   badgeNum?:number,
   title:string,
 }) {
@@ -16,7 +16,7 @@ export function MenuItem (props:{
       () => console.log('clicked')} arrow={true}>
 
       <span className="icon-with-right-text">
-        <i className={props.icon} />
+        {props.icon && <i className={props.icon} />}
         <span>{props.title}</span>
       </span>
 

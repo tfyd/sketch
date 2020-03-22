@@ -29,7 +29,11 @@ export class ThreadProfile extends React.Component<Props, State> {
 
     const rewardList:string[] = [];
     if (thread.recent_rewards[0]) {
-      thread.recent_rewards[0].author.forEach((author) => rewardList.push(author.attributes.name));
+      // FIXME: 我们好像这里对reward的datatype理解不同. 我如果没有理解错的话,每个reward只有一个author和receiver.
+      // 并不是每个reward都有author或receiver, e.g. 对于自己发送的reward (author是自己),那么author为空. 对于自己收到的reward (receiver是自己), 那么receiver为空
+      // 后端format object的方式很奇怪,是用array,再把array转成object. 这样一个问题就是,如果这个object是空的,那么得到的就是一个空的array. 很难区别后端是想返回一个空的object,还是空的array
+      // 这里我暂时comment起来了 -03/19 Emol
+      // thread.recent_rewards[0].author.forEach((author) => rewardList.push(author.attributes.name));
     }
 
     return <Card className="comps-thread-thread-profile">
