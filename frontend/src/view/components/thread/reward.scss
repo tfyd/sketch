@@ -36,9 +36,5 @@
         border-bottom: 1px solid rgba(51, 51, 51, 1);
         width: 263px;
         font-size: var(--font-size-12);
-        &::-webkit-outer-spin-button,
-        &::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-        }
     }
 }

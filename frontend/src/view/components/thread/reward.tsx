@@ -3,6 +3,7 @@ import { Popup } from '../common/popup';
 import './reward.scss';
 import { Button } from '../common/button';
 import { Colors } from '../../theme/theme';
+import { InputNumber } from '../common/input/number';
 
 type RewardType = 'salt'|'fish'|'ham';
 
@@ -16,12 +17,14 @@ interface Props {
 
 interface State {
   value:string;
+  valid:boolean;
   selected?:RewardType;
 }
 
 export class Reward extends React.Component<Props, State> {
   public state:State = {
     value:'',
+    valid:false,
   };
 
   public rewards:[RewardType, string][] = [['salt', '盐粒'], ['fish', '咸鱼'], ['ham', '火腿']];
@@ -29,28 +32,24 @@ export class Reward extends React.Component<Props, State> {
   public onSelect = (type:RewardType) => {
     this.setState({
       selected: type,
+      valid:false,
+      value:'',
     });
   }
 
-  public onInput = (event:React.ChangeEvent<HTMLInputElement>) => {
+  public onInput = (valid:boolean, value:string) => {
     this.setState({
-      value:event.target.value,
+      valid,
+      value,
     });
   }
 
-  public validate = () => {
-    const count = parseFloat(this.state.value);
-    if (this.state.selected && this.rewards.findIndex((v) => v[0] === this.state.selected) >= 0
-      && !isNaN(count) && Number.isInteger(count) && count > 0 && count <= Math.min(100, this.props[this.state.selected])) {
-        return count;
-    }
-    return -1;
-  }
+  public validate = () => (this.state.valid && this.state.selected &&
+    this.rewards.findIndex((v) => v[0] === this.state.selected) >= 0)
 
   public onConfirm = () => {
-    const value = this.validate();
-    if (value > 0) {
-      this.props.onReward(this.state.selected as RewardType, value);
+    if (this.validate()) {
+      this.props.onReward(this.state.selected!, Number.parseFloat(this.state.value));
     }
   }
 
@@ -77,12 +76,13 @@ export class Reward extends React.Component<Props, State> {
           )
         }
       </div>
-      <input className="count" placeholder={`填写数量（1 - ${maxValue}）`}
+      <InputNumber className="count" placeholder={`填写数量（1 - ${maxValue}）`}
         disabled={this.state.selected === undefined}
         value={this.state.value} onChange={this.onInput}
-        type="number" min={1} max={maxValue}
+        min={1} max={maxValue} fractionDigits={0}
       />
-      <Button disabled={this.validate() <= 0} onClick={this.onConfirm}
+      <Button disabled={!this.validate()}
+        onClick={this.onConfirm}
         color={Colors.primary}>
         确认
       </Button>

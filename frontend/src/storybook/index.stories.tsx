@@ -58,6 +58,7 @@ import { bbcodTestCases } from '../test/bbcode/bbcode';
 import { loadTestData, formatTestData } from '../test/bbcode/additionalTest';
 import { App } from '../view';
 import { Reward } from '../view/components/thread/reward';
+import { InputNumber } from '../view/components/common/input/number';
 import { MenuItem, Menu } from '../view/components/common/menu';
 import { HomeworkPreview } from '../view/components/home/homework-preview';
 
@@ -353,6 +354,37 @@ storiesOf('Common Components', module)
       </div>
     </Loading>,
   )
+  .add('InputNumber', () => (React.createElement(class extends React.Component<{}, {
+    value:string; valid:boolean
+  }> {
+    public state = {
+      valid: false,
+      value:'',
+    };
+
+    public onChange = (valid:boolean, value:string) => {
+      this.setState({
+        valid,
+        value,
+      });
+      console.log(valid, value);
+    }
+
+    public render() {
+      return <InputNumber
+        value={this.state.value}
+        onChange={this.onChange}
+        fractionDigits={number('fractionDigits', 0)}
+        disabled={boolean('disabled', false)}
+        placeholder={text('placeholder', 'placeholder')}
+        min={number('min', -10)}
+        max={number('max', 10)}
+        style={{
+          borderColor: this.state.valid ? 'black' :'red',
+        }}
+      />;
+    }
+  })))
   .add('Menu', () => (
     <Menu>
       <MenuItem icon="far fa-thumbs-up icon" title="点赞提醒" badgeNum={1000} />
