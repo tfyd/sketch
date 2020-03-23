@@ -22,17 +22,14 @@ class ThreadProfileResource extends JsonResource
         if ((!$this->is_anonymous)||((auth('api')->check())&&(auth('api')->id()===$this->user_id))){
             $author = new UserBriefResource($this->whenLoaded('author'));
         }else{
-            $author = [];
+            $author = null;
         }
-        $tongren = [];
+        $tongren = null;
         if($this->tongren){
             $tongren = new TongrenResource($this->tongren);
         }
-        $component_index_brief = [];
-        if($this->component_index){
-            $component_index_brief = PostIndexResource::collection($this->component_index);
-        }
-        $random_review = [];
+        $component_index_brief = PostIndexResource::collection($this->component_index());
+        $random_review = null;
         if($this->random_review){
             $random_review = new PostBriefResource($this->random_review);
         }
