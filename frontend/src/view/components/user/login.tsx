@@ -6,11 +6,13 @@ import { NoticeBar } from '../common/notice-bar';
 import { RoutePath } from '../../../config/route-path';
 import { Button } from '../common/button';
 import { Colors } from '../../theme/theme';
-
+import { Core } from '../../../core';
 import './login.scss';
+
 // FIXME: internal server error will be treated as incorrect password 
 interface Props {
   login:(email:string, pwd:string) => Promise<boolean>;
+  core: Core;
 }
 interface State {
   email:string;
@@ -28,33 +30,31 @@ export class Login extends React.Component<Props, State> {
   public render () {
     return <Card className = "login">
         <div className="card-content">
-
-
-        
+        <i className="fas fa-times close" onClick = {this.props.core.route.back}></i>     
         <div className="login-logo"> </div>
 
 
         <div className="inputbox">
-        <div className = "textfield">账号</div> <div className = "dividing-line">|</div> 
-        <input className="input is-normal inputfield"
-          type="email"
-          value={this.state.email}
-          onChange={(ev) => this.setState({email:ev.target.value})} />
-        <br />
+          <div className = "textfield">账号</div> <div className = "dividing-line">|</div> 
+          <input className="input is-normal inputfield"
+            type="email"
+            placeholder="邮箱/用户名"
+            value={this.state.email}
+            onChange={(ev) => this.setState({email:ev.target.value})} />
         </div>
 
         <div className="inputbox">
-        <div className = "textfield">密码</div> <div className = "dividing-line">|</div> 
-        <input
-          className="input is-normal inputfield"
-          type="password"
-          value={this.state.password}
-          onChange={(ev) => this.setState({password:ev.target.value})} />
+          <div className = "textfield">密码</div> <div className = "dividing-line">|</div> 
+          <input
+            className="input is-normal inputfield"
+            type="password"
+            value={this.state.password}
+            onChange={(ev) => this.setState({password:ev.target.value})} />
         </div>
 
-        { this.state.errMsg && <NoticeBar>{this.state.errMsg}</NoticeBar> }
+        { this.state.errMsg && <div className = "error">{this.state.errMsg}</div> }
 
-        <Button type='ellipse' color = {Colors.primary} onClick={() => async (ev) => {
+        <Button type='login' color = {Colors.primary} onClick={async() => {
           if (this.state.email === '') {
             this.setState({errMsg: '邮箱 不能为空。'});
           } else if (this.state.password === '') {
@@ -69,10 +69,11 @@ export class Login extends React.Component<Props, State> {
             }
           }
         }}>登录</Button>
+        <div className = "regisbox">
+          <Link to={RoutePath.register} className="register">注册</Link>
 
-        <Link to={RoutePath.register} className="register">注册</Link>
-
-        <Link to={RoutePath.reset_password} className="forgot-password">忘记密码?</Link>
+          <Link to={RoutePath.reset_password} className="forgot-password">忘记密码?</Link>
+        </div>
 
       </div>
 

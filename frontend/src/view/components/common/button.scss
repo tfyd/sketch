@@ -20,6 +20,24 @@
   height: 30px;
 }
 
+@media screen and (min-width: 306px) { 
+  .button.login {
+    border-radius: var(--radius-biggest);
+    height: 38px;
+    width: 306px;
+    margin: 24px auto 12px auto;
+  }
+}
+
+@media screen and (max-width: 305px) { 
+  .button.login {
+    border-radius: var(--radius-biggest);
+    height: 38px;
+    width: 100%;
+    margin: 24px auto 12px auto;
+  }
+}
+
 .button.disabled {
   opacity: 0.6;
   cursor: not-allowed;
