@@ -7,12 +7,17 @@ import { TagHandler, ChannelHandler, BianyuanHandler } from './filter-handler';
 import { Route } from './route';
 import { saveStorage } from '../utils/storage';
 import { Themes } from '../view/theme/theme';
+import { updateNoticeTheme } from '../view/components/common/notice';
+import { FAQHandler } from './cache-handler';
 const debounce = require('lodash/debounce');
 
 export type Filters = {
   tag:TagHandler,
   channel:ChannelHandler,
   bianyuan:BianyuanHandler,
+};
+export type Cache = {
+  FAQ:FAQHandler,
 };
 
 export class Core {
@@ -23,6 +28,7 @@ export class Core {
   public windowResizeEvent:EventBus<void>;
   public route:Route;
   public filter:Filters;
+  public cache:Cache;
 
   constructor () {
     (window as any).core = this;
@@ -38,6 +44,9 @@ export class Core {
       channel: new ChannelHandler(this.db),
       bianyuan: new BianyuanHandler(this.db),
     };
+    this.cache = {
+      FAQ: new FAQHandler(this.db),
+    };
     this.route = new Route(this.history);
     this.windowResizeEvent = new EventBus();
     window.addEventListener('resize', debounce(() => {
@@ -52,6 +61,7 @@ export class Core {
   }
 
   public switchTheme (theme:Themes) {
+    updateNoticeTheme(theme);
     const appElement = document.getElementById('app');
     if (appElement) {
       appElement.setAttribute('class', `theme-${theme}`);

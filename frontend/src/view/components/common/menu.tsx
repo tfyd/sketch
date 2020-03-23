@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { classnames } from '../../../utils/classname';
 import { List } from './list';
 import { Badge } from './badge';
 import './menu.scss';
@@ -7,7 +6,7 @@ const badgeStyle:React.CSSProperties = {float:'right'};
 
 export function MenuItem (props:{
   onClick?:( params? ) => void,
-  icon:string,
+  icon?:string,
   badgeNum?:number,
   title:string,
 }) {
@@ -17,7 +16,7 @@ export function MenuItem (props:{
       () => console.log('clicked')} arrow={true}>
 
       <span className="icon-with-right-text">
-        <i className={props.icon} />
+        {props.icon && <i className={props.icon} />}
         <span>{props.title}</span>
       </span>
 
@@ -31,7 +30,7 @@ export function Menu (props:{
   children:React.ReactNode;
 }) {
   return (
-    <List className="menu">
+    <List className="components-common-menu">
       {props.children}
     </List>);
 }

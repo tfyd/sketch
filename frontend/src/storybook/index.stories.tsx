@@ -58,6 +58,9 @@ import { bbcodTestCases } from '../test/bbcode/bbcode';
 import { loadTestData, formatTestData } from '../test/bbcode/additionalTest';
 import { App } from '../view';
 import { MenuItem, Menu } from '../view/components/common/menu';
+import { NoticeType, notice } from '../view/components/common/notice';
+import { HomeworkPreview } from '../view/components/home/homework-preview';
+import { Picker, Item } from '../view/components/common/picker';
 
 const core = new Core();
 fakeDB(core.db);
@@ -357,7 +360,31 @@ storiesOf('Common Components', module)
       <MenuItem icon="fas fa-gift icon" title="打赏提醒" badgeNum={1} />
     </Menu>
   ))
-  .add('InputText', () => (React.createElement(class extends React.Component<{}, { value: string }> {
+  .add('Notice', () => (React.createElement(class extends React.Component<{}, {content:string}> {
+    public state = {
+      content:'message content',
+    };
+
+    public onChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+      this.setState({
+        content: event.target.value,
+      });
+    }
+
+    public render() {
+      return <div>
+        <input value={this.state.content} onChange={this.onChange}/>
+        {
+          Object.keys(NoticeType).map((value:string) => <button key={value}
+            onClick={() => notice.addNotice(this.state.content, value as NoticeType, 5000) }>
+              {value}
+            </button>)
+        }
+      </div>;
+    }
+  },
+  )))
+  .add('InputText', () => (React.createElement(class extends React.Component<{}, { value:string }> {
     public state = {
       value: '',
     };
@@ -383,12 +410,74 @@ storiesOf('Common Components', module)
         onClick={() =>
           console.log('onClick')
         }
-        onKeyDown={(e) =>
-          console.log('onKeyDown', e)
+        onKeyDown={() =>
+          console.log('onKeyDown')
         }
       />;
     }
-  })));
+  })))
+  .add('Picker', () => (React.createElement(
+    class extends React.Component<{}, {
+      showPicker:boolean,
+    }> {
+      public state = {
+        showPicker: false,
+      };
+
+      public show = () => {
+        this.setState({showPicker:  true});
+      }
+
+      public hide = () => {
+        this.setState({showPicker:  false});
+      }
+
+      public confirm = (v) => {
+        this.hide();
+        console.log(v);
+      }
+
+      public generateItems = (max:number) => {
+        const items:Item[]= [];
+        for (let index = 0; index < max; index++) {
+          items.push({
+            label: index,
+            value: index.toString(),
+          });
+        }
+        return items;
+      }
+
+      public render() {
+        return (
+          <div>
+            <Button onClick={this.show}>显示 Picker</Button>
+            {
+              this.state.showPicker &&
+              <Picker
+                onCancel={this.hide}
+                onConfirm={this.confirm}
+                columnOpts={[
+                  {
+                    key: '1',
+                    items: () => this.generateItems(10),
+                  },
+                  {
+                    key: '2',
+                    items: (selectedValue) => selectedValue['1'] ? this.generateItems(Number.parseInt(selectedValue['1'])) :[],
+                  },
+                  {
+                    key: '3',
+                    items: (selectedValue) => selectedValue['2'] ? this.generateItems(Number.parseInt(selectedValue['2'])) :[],
+                  },
+                ]}
+              />
+            }
+          </div>
+        );
+      }
+    },
+  )));
 
 storiesOf('Common Components/Notice Bar', module)
   .add('short message', () => <NoticeBar
@@ -551,7 +640,9 @@ storiesOf('Common Components/Navigation Bar', module)
     };
     public render () {
       return <NavBar goBack={action('goBack')}
-      onMenuClick={() => this.setState({showPopup: true})}>
+        menu={NavBar.MenuIcon({
+          onClick: () => this.setState({showPopup: true}),
+        })}>
       {text('title', 'example title')}
       {this.state.showPopup &&
         <PopupMenu
@@ -595,6 +686,34 @@ storiesOf('Home Components/HomePage', module)
             threads={items}>
         </ChannelPreview>
         </Router>;
+    }
+  }))
+  .add('HomeworkPreview', () => React.createElement(class extends React.Component {
+    public onMoreClick = () => {
+      console.log('click more');
+    }
+
+    public onHomeworkClick = (id:number) => {
+      console.log(`click id: ${id}`);
+    }
+
+    private homeworks:ResData.BriefHomework[] = [
+      {'type':'homework', 'id':5, 'attributes':{'title':'第五次作业', 'topic':'纽约客', 'level':0, 'is_active':true, 'purchase_count':0, 'worker_count':14, 'critic_count':6}},
+      {'type':'homework', 'id':4, 'attributes':{'title':'第四次作业', 'topic':'合不上的行李箱', 'level':0, 'is_active':true, 'purchase_count':0, 'worker_count':10, 'critic_count':8}},
+      {'type':'homework', 'id':3, 'attributes':{'title':'第三次作业', 'topic':'失控', 'level':0, 'is_active':true, 'purchase_count':0, 'worker_count':11, 'critic_count':23}},
+      {'type':'homework', 'id':2, 'attributes':{'title':'第二次作业', 'topic':'最大的恐惧不是死亡', 'level':0, 'is_active':false, 'purchase_count':0, 'worker_count':5, 'critic_count':14}},
+      {'type':'homework', 'id':1, 'attributes':{'title':'第一次作业', 'topic':'春天的故事', 'level':0, 'is_active':false, 'purchase_count':0, 'worker_count':7, 'critic_count':8}},
+    ];
+
+    public render() {
+      return <div style={{
+        backgroundColor:'#f4f5f9',
+      }}>
+        <HomeworkPreview
+          onHomeworkClick={this.onHomeworkClick}
+          onMoreClick={this.onMoreClick}
+          homeworks={this.homeworks}/>
+      </div>;
     }
   }))
   /*
@@ -726,45 +845,30 @@ storiesOf('Thread Components', module)
   .add('list preview', () => <Card>
     <ThreadPreview
       mini={boolean('mini', false)}
-      data={{
-        type: 'thread',
-        id: 1,
-        attributes: {
-          title: randomCnWords(number('title', 20), 0.15),
-          brief: randomCnWords(number('brief', 40), 0.2),
-          view_count: number('view', 200),
-          reply_count: number('reply', 40),
-          channel_id: 1,
-        },
-        last_post: {
-          type: 'post',
+      data={(() => {
+        const thread = ResData.allocThread();
+        thread.id = 1;
+        thread.attributes.title = randomCnWords(number('title', 20), 0.15);
+        thread.attributes.brief = randomCnWords(number('brief', 40), 0.2);
+        thread.attributes.view_count = number('view', 200);
+        thread.attributes.reply_count = number('reply', 40);
+        thread.attributes.channel_id = 1;
+        thread.last_post = ResData.allocPost();
+        thread.last_post.id = 1;
+        thread.last_post.attributes.title = randomCnWords(number('post title', 40), 0.2);
+        thread.last_post.attributes.brief = randomCnWords(20);
+        thread.author.attributes.name = randomCnWords(number('author name', 3), 0),
+        thread.author.id = 1;
+        thread.tags.push({
+          type: 'tag',
           id: 1,
           attributes: {
-            title: randomCnWords(number('post title', 40), 0.2),
-            body: '',
-            brief: randomCnWords(20),
+            tag_name: '日常闲聊',
+            tag_type: '',
           },
-          info: ResData.allocPostInfo(),
-          parent: [],
-        },
-        author: {
-          id: 1,
-          attributes: {
-            name: randomCnWords(number('author name', 3), 0),
-          },
-          type: 'user',
-        },
-        tags: [
-          {
-            type: 'tag',
-            id: 1,
-            attributes: {
-              tag_name: '日常闲聊',
-              tag_type: '',
-            },
-          },
-        ],
-      }}
+        });
+        return thread;
+      })()}
       onTagClick={action('toChannelTag')}
       onClick={action('onClick')}
       onUserClick={action('onUserClick')}

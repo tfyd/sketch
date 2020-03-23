@@ -2,10 +2,6 @@ import * as React from 'react';
 import { Switch, Route, RouteComponentProps } from 'react-router-dom';
 import { Core } from '../../core';
 import { User } from './user';
-import { Message } from './message';
-import { PersonalMessage } from './message/personal-msg';
-import { Dialogue } from './message/dialogue';
-import { PublicNotice } from './message/public-notice';
 import { Status } from './status';
 import { LoginRoute } from './user/login';
 import { HomeMain } from './home/main';
@@ -19,7 +15,21 @@ import { Suggestion } from './home/suggestion';
 import { Library } from './home/library';
 import { Collection } from './collection';
 import { ForumTags } from '../components/thread/forum-tags';
+
+// msg system
+import { Message } from './message';
+import { PersonalMessage } from './message/personal-msg';
+import { Dialogue } from './message/dialogue';
+import { PublicNotice } from './message/public-notice';
 import { Votes } from './message/votes';
+import { Book } from './forum/book';
+import { Reply } from '../components/thread/reply';
+import { Review } from '../components/thread/review';
+import { RewardNotice } from './message/reward-notice';
+
+// my
+import { FAQMenu } from './faq/faq-menu';
+import { FAQContent } from './faq/faq-content';
 
 interface Props {
   core:Core;
@@ -44,12 +54,12 @@ export const MobileRoutes = {
   // '/homethread': HomeThread,
   // '/threads': HomeThread,
   // '/books': Books,
-  // '/book/:id': Book,
+  [RoutePath.chapter]: Chapter,
+  [RoutePath.book]: Book,
   // '/thread/:id': Thread,
 
   // forum
   [RoutePath.forum]: Forum,
-  [RoutePath.chapter]: Chapter,
 
   // user
   [RoutePath.user]: User,
@@ -68,7 +78,11 @@ export const MobileRoutes = {
   [RoutePath.dialogue]: Dialogue,
   [RoutePath.messages]: Message,
   [RoutePath.votes]: Votes,
+  [RoutePath.rewards]: RewardNotice,
 
+  // my
+  [RoutePath.FAQMenu]: FAQMenu,
+  [RoutePath.FAQContent]: FAQContent,
   // other
   [RoutePath.tags]: ForumTags,
   [RoutePath.search]: SearchPage,

@@ -16,23 +16,15 @@ class HelpfaqTest extends TestCase
             ->assertJsonStructure([
                 "code",
                 "data" => [
-                    "faqs" => [
-                        '*' => [
-                            "type",
-                            "id",
-                            "attributes" => [
-                                "key",
-                                "question",
-                                "answer",
-                            ]
-                        ],
-                    ],
-                    "faq_keys" => [
-                        '*' => [
-                            "title",
-                            "children"
+                    '*' => [
+                        "type",
+                        "id",
+                        "attributes" => [
+                            "key",
+                            "question",
+                            "answer",
                         ]
-                    ]
+                    ],
                 ]
             ]);
     }

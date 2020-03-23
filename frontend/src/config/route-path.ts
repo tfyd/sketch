@@ -6,6 +6,7 @@ export enum RoutePath {
 
   // forum
   forum = '/thread_index',
+  book = '/book/:id',
   chapter = '/book/:bid/chapter/:cid',
 
   // user
@@ -27,6 +28,11 @@ export enum RoutePath {
   publicNotice = '/messages/publicnotice',
   messages = '/messages/activity',
   votes = '/messages/vote',
+  rewards = '/messages/reward',
+
+  // my
+  FAQMenu = '/my/faq/all',
+  FAQContent = '/my/faq/:key',
 
   // other
   tags = '/tags',
