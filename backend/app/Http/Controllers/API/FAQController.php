@@ -27,10 +27,7 @@ class FAQController extends Controller
     public function index()
     {
         $faqs = $this->all_faqs();
-        return response()->success([
-            'faqs' => FAQResource::collection($faqs),
-            'faq_keys' => config('faq')
-            ]);
+        return response()->success(FAQResource::collection($faqs));
     }
 
     public function store(Request $request)

@@ -58,7 +58,9 @@ import { bbcodTestCases } from '../test/bbcode/bbcode';
 import { loadTestData, formatTestData } from '../test/bbcode/additionalTest';
 import { App } from '../view';
 import { MenuItem, Menu } from '../view/components/common/menu';
+import { NoticeType, notice } from '../view/components/common/notice';
 import { HomeworkPreview } from '../view/components/home/homework-preview';
+import { Picker, Item } from '../view/components/common/picker';
 
 const core = new Core();
 fakeDB(core.db);
@@ -358,6 +360,30 @@ storiesOf('Common Components', module)
       <MenuItem icon="fas fa-gift icon" title="打赏提醒" badgeNum={1} />
     </Menu>
   ))
+  .add('Notice', () => (React.createElement(class extends React.Component<{}, {content:string}> {
+    public state = {
+      content:'message content',
+    };
+
+    public onChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+      this.setState({
+        content: event.target.value,
+      });
+    }
+
+    public render() {
+      return <div>
+        <input value={this.state.content} onChange={this.onChange}/>
+        {
+          Object.keys(NoticeType).map((value:string) => <button key={value}
+            onClick={() => notice.addNotice(this.state.content, value as NoticeType, 5000) }>
+              {value}
+            </button>)
+        }
+      </div>;
+    }
+  },
+  )))
   .add('InputText', () => (React.createElement(class extends React.Component<{}, { value:string }> {
     public state = {
       value: '',
@@ -389,7 +415,69 @@ storiesOf('Common Components', module)
         }
       />;
     }
-  })));
+  })))
+  .add('Picker', () => (React.createElement(
+    class extends React.Component<{}, {
+      showPicker:boolean,
+    }> {
+      public state = {
+        showPicker: false,
+      };
+
+      public show = () => {
+        this.setState({showPicker:  true});
+      }
+
+      public hide = () => {
+        this.setState({showPicker:  false});
+      }
+
+      public confirm = (v) => {
+        this.hide();
+        console.log(v);
+      }
+
+      public generateItems = (max:number) => {
+        const items:Item[]= [];
+        for (let index = 0; index < max; index++) {
+          items.push({
+            label: index,
+            value: index.toString(),
+          });
+        }
+        return items;
+      }
+
+      public render() {
+        return (
+          <div>
+            <Button onClick={this.show}>显示 Picker</Button>
+            {
+              this.state.showPicker &&
+              <Picker
+                onCancel={this.hide}
+                onConfirm={this.confirm}
+                columnOpts={[
+                  {
+                    key: '1',
+                    items: () => this.generateItems(10),
+                  },
+                  {
+                    key: '2',
+                    items: (selectedValue) => selectedValue['1'] ? this.generateItems(Number.parseInt(selectedValue['1'])) :[],
+                  },
+                  {
+                    key: '3',
+                    items: (selectedValue) => selectedValue['2'] ? this.generateItems(Number.parseInt(selectedValue['2'])) :[],
+                  },
+                ]}
+              />
+            }
+          </div>
+        );
+      }
+    },
+  )));
 
 storiesOf('Common Components/Notice Bar', module)
   .add('short message', () => <NoticeBar

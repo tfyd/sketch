@@ -3,7 +3,6 @@
     top: 10px;
     width: 100%;
     z-index: 999;
-
     .notice {
         border: black 1px solid;
         height: 20px;
@@ -16,15 +15,4 @@
         padding: 4px 16px;
         margin: 4px auto;
     }
-
-    .notice.error {
-        border: red 1px solid;
-        color: red;
-    }
-
-    .notice.success {
-        border-color: green;
-        color: green;
-    }
-
 }
