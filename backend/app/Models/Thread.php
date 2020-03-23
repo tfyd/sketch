@@ -452,7 +452,7 @@ class Thread extends Model
     {
         $posts = Post::with('simpleInfo.reviewee')
         ->threadOnly($this->id)
-        ->withType($this->index_component_type())
+        ->withTypes($this->index_component_type())
         ->brief()
         ->get();
         return $posts->sortBy('simpleInfo.order_by');
