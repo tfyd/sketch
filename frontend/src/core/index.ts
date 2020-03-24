@@ -9,12 +9,16 @@ import { saveStorage, FontType } from '../utils/storage';
 import { Themes } from '../view/theme/theme';
 import { updateNoticeTheme } from '../view/components/common/notice';
 import { ResData } from '../config/api';
+import { FAQHandler } from './cache-handler';
 const debounce = require('lodash/debounce');
 
 export type Filters = {
   tag:TagHandler,
   channel:ChannelHandler,
   bianyuan:BianyuanHandler,
+};
+export type Cache = {
+  FAQ:FAQHandler,
 };
 
 interface State {
@@ -32,6 +36,7 @@ export class Core {
   public windowResizeEvent:EventBus<void>;
   public route:Route;
   public filter:Filters;
+  public cache:Cache;
 
   // data used cross components
   public state:State = {
@@ -54,6 +59,9 @@ export class Core {
       tag: new TagHandler(this.db),
       channel: new ChannelHandler(this.db),
       bianyuan: new BianyuanHandler(this.db),
+    };
+    this.cache = {
+      FAQ: new FAQHandler(this.db),
     };
     this.route = new Route(this.history);
     this.windowResizeEvent = new EventBus();

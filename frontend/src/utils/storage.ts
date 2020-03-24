@@ -1,5 +1,6 @@
 import { Themes } from '../view/theme/theme';
 import { ResData } from '../config/api';
+import { DBResponse } from '../core/db';
 
 export type FontType = 'simplifiedChinese'|'traditionalChinese';
 
@@ -8,6 +9,11 @@ export type FilterDataType<T> = {
   updated_at:number;
   list:T[];
   selectedList:number[];
+};
+
+export type CacheData<T> = {
+  updated_at:number;
+  data:T;
 };
 
 export interface Storage {
@@ -24,6 +30,7 @@ export interface Storage {
     fontSize:number;
     fontType:FontType;
   };
+  faq:CacheData<DBResponse<'getFAQs'>>;
 }
 
 export function allocStorage () : Storage {
@@ -52,6 +59,10 @@ export function allocStorage () : Storage {
     readingSettings: {
       fontSize: 14,
       fontType: 'simplifiedChinese',
+    },
+    faq: {
+      updated_at: 0,
+      data: [],
     },
   };
 }

@@ -61,18 +61,18 @@ export namespace ResData {
   }
 
   export interface Reward {
-    id:number;
     type:'reward';
+    id:number;
     attributes:{
-      'rewardable_type':string;
-      'rewardable_id':number;
-      'reward_value':number;
-      'reward_type':string;
-      'created_at':Timestamp;
-      'deleted_at':Timestamp;
+      rewardable_type:ReqData.Reward.rewardableType;
+      rewardable_id:number;
+      reward_type:ReqData.Reward.rewardType;
+      reward_value:number;
+      created_at:Timestamp;
+      deleted_at:Timestamp;
     };
-    author:User|null;
-    receiver:User|null;
+    author?:User;   //available at reward_received
+    receiver?:User; //available at reward_sent
   }
 
   export function allocReward () : Reward {
@@ -80,15 +80,14 @@ export namespace ResData {
       id: 0,
       type: 'reward',
       attributes: {
-        rewardable_type: '',
+        rewardable_type: ReqData.Reward.rewardableType.post,
         rewardable_id: 0,
         reward_value: 0,
-        reward_type: '',
+        reward_type: ReqData.Reward.rewardType.fish,
         created_at: '',
         deleted_at: '',
       },
-      author: null,
-      receiver: null,
+      author: allocUser(),
     };
   }
 
@@ -421,8 +420,25 @@ export namespace ResData {
       attitude:ReqData.Vote.attitude;
       created_at:Timestamp;
     };
-    author:User;
+    author?:User;
+    receiver?:User;
   }
+
+  export interface Reward {
+    type:'reward';
+    id:number;
+    attributes:{
+      rewardable_type:ReqData.Reward.rewardableType;
+      rewardable_id:number;
+      reward_type:ReqData.Reward.rewardType;
+      reward_value:number;
+      created_at:Timestamp;
+      deleted_at:Timestamp;
+    };
+    author?:User;   //available at reward_received
+    receiver?:User; //available at reward_sent
+  }
+
   export interface Collection {
     type:'collection';
     id:number;
@@ -457,6 +473,16 @@ export namespace ResData {
       purchase_count:number;
       worker_count:number;
       critic_count:number;
+    };
+  }
+
+  export interface FAQ {
+    type:'faq';
+    id:number;
+    attributes:{
+      key:string;
+      question:string;
+      answer:string;
     };
   }
 }
@@ -537,6 +563,20 @@ export namespace ReqData {
       downvote = 'downvote',
       funnyvote = 'funnyvote',
       foldvote = 'foldvote',
+    }
+  }
+
+  export namespace Reward {
+    export enum rewardableType {
+      post = 'post',
+      quote = 'quote',
+      status = 'status',
+      thread = 'thread',
+    }
+    export enum rewardType {
+      salt = 'salt',
+      fish = 'fish',
+      ham = 'ham',
     }
   }
 

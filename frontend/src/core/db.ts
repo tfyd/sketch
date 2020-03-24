@@ -318,7 +318,22 @@ export class DB {
     });
   }
 
-  // 评票
+  // FIXME
+  //reward system
+  // get rewards received by a user
+  public getUserRewardsReceived = (userId:number = this.user.id) :
+    Promise<ResData.Reward[]> =>
+      this._get(`/user/${userId}/reward_received`)
+
+  // get rewards sent by a user
+  public getUserRewardsSent = (userId:number = this.user.id) :
+    Promise<ResData.Reward[]> =>
+      this._get(`/user/${userId}/reward_sent`)
+
+  public deleteReward = (rewardId:number) :
+    Promise<string> => this._delete(`/reward/${rewardId}`)
+
+  // Vote System
   public vote (type:ReqData.Vote.type, id:number, attitude:ReqData.Vote.attitude) : Promise<ResData.Vote> {
     return this._post('/vote', {
       body: {
@@ -348,12 +363,17 @@ export class DB {
     });
   }
 
-  public getUserVotes (userId:number) : Promise<ResData.Vote[]> {
-    return this._get(`/user/${userId}/vote_received`);
-  }
+  // get votes received by a user
+  public getUserVotesReceived = (userId:number = this.user.id) :
+    Promise<ResData.Vote[]>  =>
+      this._get(`/user/${userId}/vote_received`)
+
+  public getUserVotesSent = (userId:number = this.user.id) :
+    Promise<ResData.Vote[]> =>
+      this._get(`/user/${userId}/vote_sent`)
 
   // 删除评票
-  public deleteVote (voteId:number) : Promise<void> {
+  public deleteVote (voteId:number) : Promise<string> {
     return this._delete(`/vote/${voteId}`);
   }
 
@@ -554,6 +574,11 @@ export class DB {
     return this._get('/config/allChannels');
   }
 
+  // help faq system
+  public getFAQs = () : Promise<ResData.FAQ[]> => {
+    return this._get('/helpfaq');
+  }
+  // others
   public addQuote (body:{
     body:string;
     is_anonymous?:boolean;

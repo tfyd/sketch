@@ -6,7 +6,7 @@ import { NavBar } from '../../components/common/navbar';
 import { MessageMenu } from './message-menu';
 import { List } from '../../components/common/list';
 import { RoutePath } from '../../../config/route-path';
-import { MarkAllAsRead } from './mark-all-as-read';
+import { Toolbar } from './toolbar';
 import { Menu, MenuItem } from '../../components/common/menu';
 import { DBResponse } from '../../../core/db';
 
@@ -38,17 +38,17 @@ export class PersonalMessage extends React.Component<MobileRouteProps, State> {
     const query = {withStyle: ReqData.Message.style.receiveBox};
     const fetchMsgData = getMessages(query)
       .catch((e) => {
-        console.log(e);
+        // console.log(e);
         return this.state.messageData;
       });
     const fetchPublicNotice = getPublicNotice()
       .catch((e) => {
-        console.log(e);
+        // console.log(e);
         return this.state.publicNoticeData;
       });
     const [messageData, publicNoticeData] = await Promise.all([fetchMsgData, fetchPublicNotice]);
     this.setState({messageData, publicNoticeData});
-    console.log(messageData, publicNoticeData);
+    // console.log(messageData, publicNoticeData);
   }
 
   public render () {
@@ -60,7 +60,7 @@ export class PersonalMessage extends React.Component<MobileRouteProps, State> {
           <MessageMenu/>
         </NavBar>}>
 
-        < MarkAllAsRead />
+        <Toolbar/>
 
         <Menu>
           <MenuItem icon="far fa-envelope icon" title="管理通知" badgeNum={1000}/>

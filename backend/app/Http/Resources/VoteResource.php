@@ -15,8 +15,8 @@ class VoteResource extends JsonResource
     */
     public function toArray($request)
     {
-        $author = [];
-        $receiver = [];
+        $author = null;
+        $receiver = null;
         if ($this->showUser()){
             $author = new UserBriefResource($this->whenLoaded('author'));
             $receiver = new UserBriefResource($this->whenLoaded('receiver'));

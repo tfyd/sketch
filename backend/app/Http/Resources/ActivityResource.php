@@ -15,7 +15,7 @@ class ActivityResource extends JsonResource
     */
     public function toArray($request)
     {
-        $item = [];
+        $item = null;
         if($this->item_type==='post'){
             $item = new PostBriefResource($this->whenLoaded('item'));
         }

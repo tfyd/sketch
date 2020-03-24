@@ -20,7 +20,7 @@ class PostResource extends JsonResource
         }else{
             $body = '';
         }
-        $author = [];
+        $author = null;
         if((!$this->is_anonymous)||((auth('api')->check())&&(auth('api')->id()===$this->user_id||auth('api')->user()->isAdmin()))){
             $author = new UserBriefResource($this->whenLoaded('author'));
         }

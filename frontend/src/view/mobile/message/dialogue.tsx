@@ -33,7 +33,7 @@ export class Dialogue extends React.Component<MobileRouteProps, State> {
       data.messages.reverse();
       this.setState({data});
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
   }
 
@@ -89,7 +89,7 @@ export class Dialogue extends React.Component<MobileRouteProps, State> {
       this.setState({ data });
       this.textEditorRef.current.clearContent();
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
   }
 

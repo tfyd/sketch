@@ -17,7 +17,7 @@ class ThreadBriefResource extends JsonResource
         if (!$this->is_anonymous){
             $author = new UserBriefResource($this->whenLoaded('author'));
         }else{
-            $author = [];
+            $author = null;
         }
         return [
             'type' => 'thread',

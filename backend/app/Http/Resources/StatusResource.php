@@ -14,7 +14,7 @@ class StatusResource extends JsonResource
      */
     public function toArray($request)
     {
-        $attachable = [];
+        $attachable = null;
         if($this->attachable_type==='post'){
             $attachable = new PostBriefResource($this->whenLoaded('attachable'));
         }
@@ -24,7 +24,7 @@ class StatusResource extends JsonResource
         if($this->attachable_type==='status'){
             $attachable = new StatusResource($this->whenLoaded('attachable'));
         }
-        
+
         $recent_rewards = [];
         if($this->recent_rewards){
             $recent_rewards = RewardResource::collection($this->recent_rewards);

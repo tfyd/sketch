@@ -5,6 +5,7 @@ import { Page } from '../../components/common/page';
 import { NavBar } from '../../components/common/navbar';
 import { ExpandableMessage } from '../../components/message/expandable-message';
 import { DBResponse } from '../../../core/db';
+import { List } from '../../components/common/list';
 
 interface State {
   publicNoticeData:DBResponse<'getPublicNotice'>;
@@ -28,11 +29,11 @@ export class PublicNotice extends React.Component<MobileRouteProps, State> {
     } else {
       publicNoticeData = await this.props.core.db.getPublicNotice()
                                 .catch((e) => {
-                                  console.log(e);
+                                  // console.log(e);
                                   return this.state.publicNoticeData;
                                 });
     }
-    console.log(publicNoticeData);
+    // console.log(publicNoticeData);
     this.setState({publicNoticeData});
   }
 
@@ -70,7 +71,9 @@ export class PublicNotice extends React.Component<MobileRouteProps, State> {
         >
           公共通知
         </NavBar>}>
-        {this.state.publicNoticeData.public_notices.map((n) => this.renderNotice(n))}
+        <List className="message-list">
+          {this.state.publicNoticeData.public_notices.map((n) => this.renderNotice(n))}
+        </List>
       </Page>);
   }
 }

@@ -33,7 +33,9 @@ export class Dropdown<T extends string|number> extends React.Component<Props<T>,
   }
 
   public render () {
-    return isMobile() ? this.renderMobile() : this.renderWeb();
+    // TODO: render mobile
+    return this.renderWeb();
+    // return isMobile() ? this.renderMobile() : this.renderWeb();
   }
 
   public renderMobile () {
@@ -65,34 +67,49 @@ export class Dropdown<T extends string|number> extends React.Component<Props<T>,
     } else {
       text = this.props.list[this.state.onIndex].text;
     }
-    return <div className="dropdown-trigger">
-      <button className="button"
-        onClick={onClick}
-        onBlur={() => this.setState({active: false})}
-        aria-haspopup="true"
-        aria-controls="dropdown-menu">
-        <span>{text}</span>
-        <span className="icon is-small">
-          <i className={classnames('fas', `fa-angle-${this.state.active ? 'up' : 'down'}`)} aria-hidden="true"></i>
-        </span>
-      </button>
-    </div>;
+    return (
+      <div className={classnames('dropdown-trigger', {'is-active': this.state.active})}>
+        <div className="item"
+          onClick={onClick}
+          onBlur={() => this.setState({active: false})}
+          aria-haspopup="true"
+          aria-controls="dropdown-menu">
+          <span>{text}</span>
+          <span className="icon">
+            <i className={classnames('fas', `fa-angle-${this.state.active ?   'up' : 'down'}`)} aria-hidden="true"></i>
+          </span>
+        </div>
+      </div>);
   }
 
+  // TODO: only fixed the css for renderWeb (renderMobile is still broken)
+  // This component still needs clean up
   public renderWeb () {
-    return <div className={classnames('dropdown', {'is-active': this.state.active}, this.props.className)}>
+    return (
+      <div className={classnames('dropdown', {'is-active': this.state.active}, this.props.className)}>
       {this.renderTrigger(() => this.setState((prevState) => ({active: !prevState.active})))}
-      <div className="dropdown-menu" role="menu">
+      {this.state.active && (
+        <div className="dropdown-menu" role="menu">
         <div className="dropdown-content">
-          {this.props.list.map((item, i) => <span
-            key={i}
-            onClick={() => {
-              this.setState({onIndex: i});
-              this.props.onClick(item.value, i);
-            }}
-            className="dropdown-item">{item.text}</span>)}
+          {this.props.list.map((item, i) => (
+            <div
+              key={i}
+              onClick={() => {
+                this.setState({onIndex: i});
+                this.props.onClick(item.value, i);
+                }}
+              className={
+                classnames(
+                  'dropdown-item',
+                  'item',
+                  {'selected' : this.state.onIndex == i},
+                  )}>
+                    {item.text}
+            </div>))}
         </div>
       </div>
-    </div>;
+      )}
+    </div>
+    );
   }
 }

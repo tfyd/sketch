@@ -17,7 +17,7 @@ class UserResource extends JsonResource
         $user = $this['user'];
         $info = $this['info'];
 
-        $intro = [];
+        $intro = null;
         if($this['intro']) {
             $intro = new UserIntroResource($this['intro']);
         }
