@@ -16,15 +16,13 @@ interface Props {
 }
 
 interface State {
-  value:string;
-  valid:boolean;
+  value:number;
   selected?:RewardType;
 }
 
 export class Reward extends React.Component<Props, State> {
   public state:State = {
-    value:'',
-    valid:false,
+    value:1,
   };
 
   public rewards:[RewardType, string][] = [['salt', '盐粒'], ['fish', '咸鱼'], ['ham', '火腿']];
@@ -32,24 +30,22 @@ export class Reward extends React.Component<Props, State> {
   public onSelect = (type:RewardType) => {
     this.setState({
       selected: type,
-      valid:false,
-      value:'',
+      value:1,
     });
   }
 
-  public onInput = (valid:boolean, value:string) => {
+  public onInput = (value:number) => {
     this.setState({
-      valid,
       value,
     });
   }
 
-  public validate = () => (this.state.valid && this.state.selected &&
+  public validate = () => (this.state.selected &&
     this.rewards.findIndex((v) => v[0] === this.state.selected) >= 0)
 
   public onConfirm = () => {
     if (this.validate()) {
-      this.props.onReward(this.state.selected!, Number.parseFloat(this.state.value));
+      this.props.onReward(this.state.selected!, this.state.value);
     }
   }
 
@@ -66,7 +62,7 @@ export class Reward extends React.Component<Props, State> {
           this.rewards.map(
             (value) => {
               const [rewardType, name] = value;
-              return <div className="reward-item"
+              return <div className="reward-item" key={rewardType}
                 onClick={() => this.onSelect(rewardType)}>
                 <input type="radio" name="reward" value={rewardType}
                   checked={this.state.selected === rewardType} readOnly/>

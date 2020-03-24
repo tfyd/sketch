@@ -355,34 +355,31 @@ storiesOf('Common Components', module)
     </Loading>,
   )
   .add('InputNumber', () => (React.createElement(class extends React.Component<{}, {
-    value:string; valid:boolean
+    value:number,
   }> {
     public state = {
-      valid: false,
-      value:'',
+      value:0,
     };
 
-    public onChange = (valid:boolean, value:string) => {
+    public onChange = (value:number) => {
       this.setState({
-        valid,
         value,
       });
-      console.log(valid, value);
     }
 
     public render() {
-      return <InputNumber
-        value={this.state.value}
-        onChange={this.onChange}
-        fractionDigits={number('fractionDigits', 0)}
-        disabled={boolean('disabled', false)}
-        placeholder={text('placeholder', 'placeholder')}
-        min={number('min', -10)}
-        max={number('max', 10)}
-        style={{
-          borderColor: this.state.valid ? 'black' :'red',
-        }}
-      />;
+      return <div>
+        <InputNumber
+          value={this.state.value}
+          onChange={this.onChange}
+          fractionDigits={number('fractionDigits', 0)}
+          disabled={boolean('disabled', false)}
+          placeholder={text('placeholder', 'placeholder')}
+          min={number('min', -10)}
+          max={number('max', 10)}
+        />
+        <button onClick={() => console.log(this.state.value)}>打印</button>
+      </div>;
     }
   })))
   .add('Menu', () => (
