@@ -1,6 +1,8 @@
 import { Themes } from '../view/theme/theme';
 import { ResData } from '../config/api';
 
+export type FontType = 'simplifiedChinese'|'traditionalChinese';
+
 type Timestamp = number;
 export type FilterDataType<T> = {
   updated_at:number;
@@ -14,10 +16,14 @@ export interface Storage {
     username:string,
     userId:number,
   };
-  theme:string;
+  theme:Themes;
   tag:FilterDataType<ResData.Tag>;
   channel:FilterDataType<ResData.Channel>;
   bianyuan:FilterDataType<{id:number, name:string}>;
+  readingSettings:{
+    fontSize:number;
+    fontType:FontType;
+  };
 }
 
 export function allocStorage () : Storage {
@@ -42,6 +48,10 @@ export function allocStorage () : Storage {
       updated_at: 0,
       list: [],
       selectedList: [],
+    },
+    readingSettings: {
+      fontSize: 14,
+      fontType: 'simplifiedChinese',
     },
   };
 }

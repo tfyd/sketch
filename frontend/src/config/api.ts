@@ -71,8 +71,8 @@ export namespace ResData {
       'created_at':Timestamp;
       'deleted_at':Timestamp;
     };
-    author:User[];
-    receiver:User[];
+    author:User|null;
+    receiver:User|null;
   }
 
   export function allocReward () : Reward {
@@ -87,8 +87,8 @@ export namespace ResData {
         created_at: '',
         deleted_at: '',
       },
-      author: [],
-      receiver: [],
+      author: null,
+      receiver: null,
     };
   }
 
@@ -198,6 +198,8 @@ export namespace ResData {
         redirect_count: 0,
         author_attitude: 0,
         summary: '',
+        annotation: null,
+        warning: '',
       },
       reviewee: allocThread(),
     };

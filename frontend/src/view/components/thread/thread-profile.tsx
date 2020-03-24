@@ -28,8 +28,8 @@ export class ThreadProfile extends React.Component<Props, State> {
     const { attributes, author, tags } = thread;
 
     const rewardList:string[] = [];
-    if (thread.recent_rewards[0]) {
-      thread.recent_rewards[0].author.forEach((author) => rewardList.push(author.attributes.name));
+    if (thread.recent_rewards) {
+      thread.recent_rewards.forEach((reward) => reward.author && rewardList.push(reward.author.attributes.name));
     }
 
     return <Card className="comps-thread-thread-profile">
@@ -58,10 +58,10 @@ export class ThreadProfile extends React.Component<Props, State> {
           </span>
       </div>
 
-      <div className="title">文案</div>
+      <div className="book-title">文案</div>
       <div className="body">{attributes.body}</div>
 
-      <div className="title">最新章节</div>
+      <div className="book-title">最新章节</div>
       <div className="last-component">{thread.last_component && thread.last_component.attributes.title}</div>
 
       <div className="events">
