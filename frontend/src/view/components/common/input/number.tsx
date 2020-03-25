@@ -58,7 +58,7 @@ export class InputNumber extends React.Component<Props> {
   public render() {
     return <input
       type="number"
-      defaultValue={this.props.value}
+      defaultValue={'' + this.props.value}
       ref={this.inputRef}
       onKeyDown={this.onKeyDown}
       onBlur={this.validate}
