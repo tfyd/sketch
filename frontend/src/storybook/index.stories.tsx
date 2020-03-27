@@ -921,7 +921,7 @@ storiesOf('Thread Components', module)
         {
           this.state.showReward && <Reward
             onClose={() => this.changeShow(false)}
-            salt={5345}
+            salt={0}
             fish={59}
             ham={5849}
             onReward={(type, num) => console.log(type, num)}
