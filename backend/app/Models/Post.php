@@ -136,10 +136,18 @@ class Post extends Model
         return $query;
     }
 
-    public function scopeWithType($query, $withType=[])
+    public function scopeWithType($query, $withType=null)
     {
         if(in_array($withType, $this->post_types)){
             return $query->where('posts.type', $withType);
+        }
+        return $query;
+    }
+
+    public function scopeWithTypes($query, $withTypes=[])
+    {
+        if(!array_diff($withTypes, $this->post_types)){
+            return $query->whereIn('posts.type', (array)$withTypes);
         }
         return $query;
     }

@@ -14,11 +14,11 @@ class PostIndexResource extends JsonResource
      */
     public function toArray($request)
     {
-        $info = [];
+        $info = null;
         if($this->type==='chapter'||$this->type==='review'){
             $info = new PostInfoBriefResource($this->whenLoaded('simpleInfo'));
         }
-        $parent = [];
+        $parent = null;
         if($this->type==='answer'){
             $parent = new PostResource($this->whenLoaded('parent'));
         }
