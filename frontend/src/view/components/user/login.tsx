@@ -39,6 +39,7 @@ export class Login extends React.Component<Props, State> {
           <input className="input is-normal inputfield"
             type="email"
             placeholder="邮箱/用户名"
+            maxLength={255}
             value={this.state.email}
             onChange={(ev) => this.setState({email:ev.target.value})} />
         </div>
@@ -48,6 +49,7 @@ export class Login extends React.Component<Props, State> {
           <input
             className="input is-normal inputfield"
             type="password"
+            maxLength={32}
             value={this.state.password}
             onChange={(ev) => this.setState({password:ev.target.value})} />
         </div>
