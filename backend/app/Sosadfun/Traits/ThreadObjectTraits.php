@@ -36,7 +36,7 @@ trait ThreadObjectTraits{
         });
 
         if(in_array($thread->channel()->type,['book','list','box'])){
-            $thread->setAttribute('component_index', $this->threadIndex($id));
+            $thread->setAttribute('component_index_brief', $this->threadIndex($id));
         }
         return $thread;
     }
