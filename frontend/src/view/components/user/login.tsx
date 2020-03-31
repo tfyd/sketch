@@ -54,7 +54,7 @@ export class Login extends React.Component<Props, State> {
 
         { this.state.errMsg && <div className = "error">{this.state.errMsg}</div> }
 
-        <Button type='login' color = {Colors.primary} onClick={async() => {
+        <Button type='high' color = {Colors.primary} onClick={async() => {
           if (this.state.email === '') {
             this.setState({errMsg: '邮箱 不能为空。'});
           } else if (this.state.password === '') {

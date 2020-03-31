@@ -21,7 +21,7 @@
 }
 
 @media screen and (min-width: 306px) { 
-  .button.login {
+  .button.high{
     border-radius: var(--radius-biggest);
     height: 38px;
     width: 306px;
@@ -30,7 +30,7 @@
 }
 
 @media screen and (max-width: 305px) { 
-  .button.login {
+  .button.high {
     border-radius: var(--radius-biggest);
     height: 38px;
     width: 100%;

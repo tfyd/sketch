@@ -11,7 +11,7 @@ export class Button extends React.Component<{
   ghost?:boolean;
   color?:Colors;
   size?:'small',
-  type?:'ellipse' | 'login',
+  type?:'ellipse' | 'high',
 }, {}> {
   public ghostStyle:React.CSSProperties = {
     backgroundColor: 'rgba(0, 0, 0, 0)',

@@ -1,8 +1,9 @@
 .login{
 
-    font-size: var(--font-size-2);
+    font-size: var(--font-size-14);
     font-family: var(--font-family-regular);
     height: 100%;
+    margin-bottom: 0px;
 
     .close {
         margin: 20px 0 0 20px;
@@ -27,8 +28,9 @@
             width: 306px;
             margin: 4px auto 0px auto;
             padding-left: 20px;
-            font-size: var(--font-size-small);
+            font-size: var(--font-size-10);
             color: var(--color-primary);
+            border-top: none;
         }
         .forgot-password{ 
             color: var(--color-primary);
@@ -54,8 +56,9 @@
             width: 100%;
             margin: 4px auto 0px auto;
             padding-left: 20px;
-            font-size: var(--font-size-small);
+            font-size: var(--font-size-10);
             color: var(--color-primary);
+            border-top: none;
         }
 
         .forgot-password{ 
@@ -75,7 +78,7 @@
     .dividing-line {
         display: inline-block;
         line-height: 25px;
-        font-size: var(--font-size-4);
+        font-size: var(--font-size-18);
         font-family: var(--font-family-light);
 
     }
@@ -101,7 +104,7 @@
         right: 0px;
         color: var(--color-font-light);
         position: absolute;
-        font-size: var(--font-size-small);
+        font-size: var(--font-size-10);
         margin: auto;
     }
     .register {
