@@ -10,7 +10,7 @@
     }
 
 
-    @media screen and (min-width: 306px) { 
+    @media screen and (min-width: 330px) { 
         .inputbox {
             background-color:var(--color-bg-base);
             border-radius: var(--radius-biggest);
@@ -23,7 +23,7 @@
             width: 306px;
             margin: 12px auto 12px auto;
         }
-
+        
         .error {
             width: 306px;
             margin: 4px auto 0px auto;
@@ -36,9 +36,14 @@
             color: var(--color-primary);
             margin-left: 180px;
         }
+
+        .button-div{
+            margin: 24px auto 12px auto;
+            width: 306px;
+        }
     }
 
-    @media screen and (max-width: 305px) { 
+    @media screen and (max-width: 329px) { 
         .inputbox {
             background-color:var(--color-bg-base);
             border-radius: var(--radius-biggest);
@@ -64,6 +69,11 @@
         .forgot-password{ 
             color: var(--color-primary);
             margin-left:50%;
+        }
+
+        .button-div{
+            margin: 24px auto 12px auto;
+            width: 100%;
         }
     }
 

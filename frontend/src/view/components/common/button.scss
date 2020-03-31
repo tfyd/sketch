@@ -22,21 +22,19 @@
   height: 30px;
 }
 
-@media screen and (min-width: 306px) { 
+@media screen and (min-width: 330px) { 
   .button.high{
     border-radius: var(--radius-biggest);
     height: 38px;
     width: 306px;
-    margin: 24px auto 12px auto;
   }
 }
 
-@media screen and (max-width: 305px) { 
+@media screen and (max-width: 329px) { 
   .button.high {
     border-radius: var(--radius-biggest);
     height: 38px;
     width: 100%;
-    margin: 24px auto 12px auto;
   }
 }
 

@@ -56,6 +56,7 @@ export class Login extends React.Component<Props, State> {
 
         { this.state.errMsg && <div className = "error">{this.state.errMsg}</div> }
 
+        <div className="button-div">
         <Button type='high' color = {Colors.primary} onClick={async() => {
           if (this.state.email === '') {
             this.setState({errMsg: '邮箱 不能为空。'});
@@ -70,7 +71,8 @@ export class Login extends React.Component<Props, State> {
               this.setState({errMsg: '用户名或密码错误。'});
             }
           }
-        }}>登录</Button>
+        }}>登录</Button></div> 
+
         <div className = "regisbox">
           <Link to={RoutePath.register} className="register">注册</Link>
 
